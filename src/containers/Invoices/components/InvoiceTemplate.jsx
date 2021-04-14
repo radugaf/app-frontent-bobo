@@ -10,7 +10,7 @@ const invoiceData = [
 ];
 
 const InvoiceTemplate = () => (
-  <Col md={12} lg={6}>
+  <Col lg={12}>
     <Card>
       <CardBody className="invoice">
         <div className="invoice__head">
@@ -60,6 +60,8 @@ const InvoiceTemplate = () => (
           <p className="invoice__grand-total">Grand Total: 146.00 RON</p>
           <ButtonToolbar className="invoice__toolbar">
             <Button>Print</Button>
+            <Button className="btn btn-success">Mark as Paid</Button>
+           
           </ButtonToolbar>
         </div>
       </CardBody>

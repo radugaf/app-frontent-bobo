@@ -103,7 +103,7 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData }) => {
     });
 
   return (
-    <Col md={12} lg={6}>
+    <Col md={12} lg={12}>
       <Card>
         <CardBody>
           <div className="react-table__wrapper">

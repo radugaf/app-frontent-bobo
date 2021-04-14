@@ -93,106 +93,104 @@ const MatTable = ({ data, SupplierInvoiceFetch }) => {
     rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
   return (
-    <>
-      <Col md={12} lg={7}>
-        <Card>
-          <CardBody>
-            <div className="card__title">
-              <h3 className="bold-text">🧾 ACHTIA FACTURI</h3>
-            </div>
-            {/* <MatTableToolbar
+    <Col lg={12}>
+      <Card>
+        <CardBody>
+          <div className="card__title">
+            <h3 className="bold-text">🧾 FACTURI PROFORME</h3>
+          </div>
+          {/* <MatTableToolbar
               selectedData={[...selected]
                 .filter((el) => el[1])
                 .map((el) => el[0])}
               numSelected={[...selected].filter((el) => el[1]).length}
               onRequestSort={handleRequestSort}
             /> */}
-            <div className="material-table__wrap">
-              <Table className="material-table">
-                <MatTableHead
-                  numSelected={[...selected].filter((el) => el[1]).length}
-                  order={order}
-                  orderBy={orderBy}
-                  onSelectAllClick={handleSelectAllClick}
-                  onRequestSort={handleRequestSort}
-                  rowCount={data.length}
-                />
-                <TableBody>
-                  {data
-                    .sort(getSorting(order, orderBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((d) => {
-                      const select = isSelected(d.id);
-                      return (
-                        <TableRow
-                          className="material-table__row"
-                          role="checkbox"
-                          onClick={(event) => handleClick(event, d.id)}
-                          aria-checked={select}
-                          tabIndex={-1}
-                          key={d.id}
-                          selected={select}
+          <div className="material-table__wrap">
+            <Table className="material-table">
+              <MatTableHead
+                numSelected={[...selected].filter((el) => el[1]).length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={data.length}
+              />
+              <TableBody>
+                {data
+                  .sort(getSorting(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((d) => {
+                    const select = isSelected(d.id);
+                    return (
+                      <TableRow
+                        className="material-table__row"
+                        role="checkbox"
+                        onClick={(event) => handleClick(event, d.id)}
+                        aria-checked={select}
+                        tabIndex={-1}
+                        key={d.id}
+                        selected={select}
+                      >
+                        <TableCell
+                          className="material-table__cell"
+                          padding="checkbox"
                         >
-                          <TableCell
-                            className="material-table__cell"
-                            padding="checkbox"
-                          >
-                            <Checkbox
-                              checked={select}
-                              className="material-table__checkbox"
-                            />
-                          </TableCell>
-                          <TableCell
-                            className="material-table__cell material-table__cell-right"
-                            component="th"
-                            scope="row"
-                            padding="none"
-                          >
-                            {d.invoice_number}
-                          </TableCell>
-                          <TableCell
-                            className="material-table__cell material-table__cell-right"
-                            component="th"
-                            scope="row"
-                            padding="none"
-                          >
-                            {d.product_title}
-                          </TableCell>
-                          <TableCell className="material-table__cell material-table__cell-right">
-                            {d.final_price} RON
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 49 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </div>
-            <TablePagination
-              component="div"
-              className="material-table__pagination"
-              count={data.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              backIconButtonProps={{ "aria-label": "Previous Page" }}
-              nextIconButtonProps={{ "aria-label": "Next Page" }}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-              nextIGetInPerPageOptions={[5, 10, 15]}
-              dir="ltr"
-              SelectProps={{
-                inputProps: { "aria-label": "rows per page" },
-                native: true,
-              }}
-            />
-          </CardBody>
-        </Card>
-      </Col>
-    </>
+                          <Checkbox
+                            checked={select}
+                            className="material-table__checkbox"
+                          />
+                        </TableCell>
+                        <TableCell
+                          className="material-table__cell material-table__cell-right"
+                          component="th"
+                          scope="row"
+                          padding="none"
+                        >
+                          {d.invoice_number}
+                        </TableCell>
+                        <TableCell
+                          className="material-table__cell material-table__cell-right"
+                          component="th"
+                          scope="row"
+                          padding="none"
+                        >
+                          {d.product_title}
+                        </TableCell>
+                        <TableCell className="material-table__cell material-table__cell-right">
+                          {d.final_price} RON
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 49 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+          <TablePagination
+            component="div"
+            className="material-table__pagination"
+            count={data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            backIconButtonProps={{ "aria-label": "Previous Page" }}
+            nextIconButtonProps={{ "aria-label": "Next Page" }}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+            nextIGetInPerPageOptions={[5, 10, 15]}
+            dir="ltr"
+            SelectProps={{
+              inputProps: { "aria-label": "rows per page" },
+              native: true,
+            }}
+          />
+        </CardBody>
+      </Card>
+    </Col>
   );
 };
 
