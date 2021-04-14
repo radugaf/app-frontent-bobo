@@ -52,22 +52,22 @@ class SidebarContent extends Component {
             />
             <SidebarLink
               title="Non-Alimentare"
-              route="/pages/products"
+              route="/pages/products-non-alimentare"
               onClick={this.hideSidebar}
             />
             <SidebarLink
               title="Echipamente"
-              route="/pages/products"
+              route="/pages/products-echipamente"
               onClick={this.hideSidebar}
             />
             <SidebarLink
               title="Servicii"
-              route="/pages/products"
+              route="/pages/products-servicii"
               onClick={this.hideSidebar}
             />
             <SidebarLink
               title="Cofetarie"
-              route="/pages/products"
+              route="/pages/products-cofetarie"
               onClick={this.hideSidebar}
             />
           </SidebarCategory>

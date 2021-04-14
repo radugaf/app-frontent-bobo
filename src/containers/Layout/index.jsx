@@ -25,40 +25,40 @@ NotificationSystem.newInstance(
 );
 
 const Layout = ({ dispatch, sidebar, theme, rtl, user }) => {
-  useEffect(() => {
-    const title = 'API Response';
-    const message = 'Test notification'; 
+  // useEffect(() => {
+  //   const title = 'API Response';
+  //   const message = 'Test notification'; 
 
-    const notificationInitialProps = {
-      content: (
-        <BasicNotification title={title} message={message} theme={theme} />
-      ),
-      closable: true,
-      duration: 5,
-      style: { top: 0, left: "calc(100vw - 100%)" },
-      className: `right-up ${rtl.direction}-support`,
-    };
-    notification.notice(notificationInitialProps);
+  //   const notificationInitialProps = {
+  //     content: (
+  //       <BasicNotification title={title} message={message} theme={theme} />
+  //     ),
+  //     closable: true,
+  //     duration: 5,
+  //     style: { top: 0, left: "calc(100vw - 100%)" },
+  //     className: `right-up ${rtl.direction}-support`,
+  //   };
+  //   notification.notice(notificationInitialProps);
 
-    const notificationIntervalKey = setInterval(() => {
-      notification.notice({
-        ...notificationInitialProps,
-        content: (
-          <BasicNotification title={title} message={message} theme={theme} />
-        ),
-        className: `right-up ${rtl.direction}-support`,
-        onClose() {
-          setTimeout(() => {
-            clearInterval(notificationIntervalKey);
-          });
-        },
-      });
-    }, 100);
-    setTimeout(() => {
-      clearInterval(notificationIntervalKey);
-    }, 5000);
-    return () => notification.destroy();
-  }, [rtl.direction, theme]);
+  //   const notificationIntervalKey = setInterval(() => {
+  //     notification.notice({
+  //       ...notificationInitialProps,
+  //       content: (
+  //         <BasicNotification title={title} message={message} theme={theme} />
+  //       ),
+  //       className: `right-up ${rtl.direction}-support`,
+  //       onClose() {
+  //         setTimeout(() => {
+  //           clearInterval(notificationIntervalKey);
+  //         });
+  //       },
+  //     });
+  //   }, 100);
+  //   setTimeout(() => {
+  //     clearInterval(notificationIntervalKey);
+  //   }, 5000);
+  //   return () => notification.destroy();
+  // }, [rtl.direction, theme]);
 
   const sidebarVisibility = () => {
     dispatch(changeSidebarVisibility());

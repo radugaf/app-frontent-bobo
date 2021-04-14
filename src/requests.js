@@ -1,4 +1,4 @@
-export const URL = "http://localhost:8000";
+export const URL = "https://edesia-development.com";
 export const BACKEND_URL = `${URL}/api/v1/`;
 
 export default {

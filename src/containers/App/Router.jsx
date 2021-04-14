@@ -6,6 +6,10 @@ import MainWrapper from "./MainWrapper";
 import Login from "../LogIn/index";
 import Products from "../Products/index";
 import ProductsBar from '../ProductsBar/index'
+import ProductsNonAlimentare from '../ProductsNonAlimentare/index'
+import ProductsEchipamente from '../ProductsEchipamente/index'
+import ProductsServicii from '../ProductsServicii/index'
+import ProductsCofetarie from '../ProductsCofetarie/index'
 import Inquiries from "../Inquiries/index";
 import Cart from "../Cart/index";
 import Dashboard from "../Dashboard/index";
@@ -25,6 +29,10 @@ const Pages = () => (
   <Switch>
     <Route path="/pages/products" component={Products} />
     <Route path="/pages/products-bar" component={ProductsBar} />
+    <Route path="/pages/products-non-alimentare" component={ProductsNonAlimentare} />
+    <Route path="/pages/products-echipamente" component={ProductsEchipamente} />
+    <Route path="/pages/products-servicii" component={ProductsServicii} />
+    <Route path="/pages/products-cofetarie" component={ProductsCofetarie} />
     <Route path="/pages/inquiries" component={Inquiries} />
     <Route path="/pages/cart" component={Cart} />
     <Route path="/pages/wishlist" component={Wishlist} />
