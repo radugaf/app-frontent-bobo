@@ -26,6 +26,7 @@
     "react-dev-utils": "^11.0.1",
     "react-dom": "^16.13.1",
     "react-draft-wysiwyg": "^1.14.5",
+    "react-dropzone": "^11.3.2",
     "react-feather": "^2.0.9",
     "react-highlight-words": "^0.16.0",
     "react-i18next": "^11.8.5",
