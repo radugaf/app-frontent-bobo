@@ -42,3 +42,24 @@ img {
 .sticky-top-custom {
   top: 90px;
 }
+
+.custom-h4 {
+  position: relative !important;
+}
+
+.invoice-button-custom, .invoice-address-custom-button {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.invoice-custom-address {
+  color: #999999;
+  max-width: 200px;
+  position: relative !important;
+}
+
