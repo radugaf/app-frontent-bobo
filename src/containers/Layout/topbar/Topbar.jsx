@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import TopbarSidebarButton from './TopbarSidebarButton';
-import TopbarProfile from './TopbarProfile';
-import TopbarSearch from './TopbarSearch'
-import TopbarButton from './TopbarButton'
+import React, { PureComponent } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import TopbarSidebarButton from "./TopbarSidebarButton";
+import TopbarProfile from "./TopbarProfile";
+import TopbarSearch from "./TopbarSearch";
+import TopbarMail from "./TopbarMail"; 
+import TopbarNotification from "./TopbarNotification"
 
 class Topbar extends PureComponent {
   static propTypes = {
@@ -13,7 +14,10 @@ class Topbar extends PureComponent {
   };
 
   render() {
-    const { changeMobileSidebarVisibility, changeSidebarVisibility } = this.props;
+    const {
+      changeMobileSidebarVisibility,
+      changeSidebarVisibility,
+    } = this.props;
 
     return (
       <div className="topbar">
@@ -23,12 +27,12 @@ class Topbar extends PureComponent {
               changeMobileSidebarVisibility={changeMobileSidebarVisibility}
               changeSidebarVisibility={changeSidebarVisibility}
             />
-            <Link className="topbar__logo" to="/dashboard_default" />
+            <Link className="topbar__logo" to="/pages/dashboard" />
           </div>
           <div className="topbar__right">
-
             <TopbarSearch />
-            {/* <TopbarButton /> */}
+            <TopbarNotification />
+            <TopbarMail new />
             <TopbarProfile />
           </div>
         </div>

@@ -6,10 +6,6 @@ import MainWrapper from "./MainWrapper";
 import Login from "../LogIn/index";
 import Products from "../Products/index";
 import ProductsBar from '../ProductsBar/index'
-import ProductsNonAlimentare from '../ProductsNonAlimentare/index'
-import ProductsEchipamente from '../ProductsEchipamente/index'
-import ProductsServicii from '../ProductsServicii/index'
-import ProductsCofetarie from '../ProductsCofetarie/index'
 import Inquiries from "../Inquiries/index";
 import Cart from "../Cart/index";
 import Dashboard from "../Dashboard/index";
@@ -24,6 +20,11 @@ import EdesiaInvoices from "../EdesiaInvoices"
 import ProductDetail from '../ProductDetail'
 import Documents from '../Documents'
 import WizardForm from '../WizardForm'
+
+import ProductsNonAlimentare from '../ProductsNonAlimentare/index'
+import ProductsEchipamente from '../ProductsEchipamente/index'
+import ProductsServicii from '../ProductsServicii/index'
+import ProductsCofetarie from '../ProductsCofetarie/index'
 
 const Pages = () => ( 
   <Switch>

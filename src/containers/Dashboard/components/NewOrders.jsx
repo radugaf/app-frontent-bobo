@@ -107,7 +107,7 @@ const NewOrders = ({carts, newOrder, onDeleteRow }) => {
       xl={6}
       lg={12}
       md={12}
-      title='Titlu pentru acest tabel'
+      title='Cereri de oferta in asteptare'
       
     >
       <Table responsive striped className="dashboard__table-orders" >

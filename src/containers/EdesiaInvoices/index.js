@@ -10,15 +10,15 @@ import { SupplierInvoiceFetch } from "../../redux/actions/products";
 const DataTable = ({ invoices, SupplierInvoiceFetch }) => {
   const reactTableData = CreateTableData();
 
-  console.log({ invoices });
+  console.log({ invoices})
   useEffect(() => {
     SupplierInvoiceFetch();
   }, []);
-  
+
   return (
     <Container>
       <Row>
-        <Col lg={5} >
+      <Col lg={5} >
           <InvoiceTemplate />
           <InvoiceTemplate />
           <InvoiceTemplate />

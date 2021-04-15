@@ -15,19 +15,24 @@ const DataTable = ({ invoices, SupplierInvoiceFetch }) => {
     SupplierInvoiceFetch();
   }, []);
   
+  // const mystyle = {
+  //   position: "-webkit-sticky",
+  //   position: "sticky",
+  //   top: "0px",
+  // };
+
   return (
     <Container>
       <Row>
-        <Col lg={5} >
-          <InvoiceTemplate />
-          <InvoiceTemplate />
+        <Col lg={5}>
+          
           <InvoiceTemplate />
           <InvoiceTemplate />
         </Col>
         <Col lg={7}>
           {/* <DataReactTable reactTableData={reactTableData} /> */}
           <div className='sticky-top sticky-top-custom'>
-          <MatTable data={invoices} />
+            <MatTable data={invoices} />
           </div>
         </Col>
       </Row>

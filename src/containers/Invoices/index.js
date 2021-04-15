@@ -6,22 +6,21 @@ import CreateTableData from "./CreateData";
 
 const DataTable = () => {
   const reactTableData = CreateTableData();
-  
+
   return (
     <Container>
       <Row>
-        <Col lg={5} >
+        <Col lg={5}>
           <InvoiceTemplate />
           <InvoiceTemplate />
           <InvoiceTemplate />
           <InvoiceTemplate />
         </Col>
         <Col lg={7}>
-          <div className='sticky-top sticky-top-custom'>
-          <DataReactTable reactTableData={reactTableData} />
+          <div className="sticky-top sticky-top-custom">
+            <DataReactTable reactTableData={reactTableData} />
           </div>
         </Col>
-
       </Row>
     </Container>
   );

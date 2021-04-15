@@ -5,14 +5,13 @@ import { connect } from "react-redux";
 import { deleteNewOrderTableData } from "../../redux/actions/newOrderTableActions";
 import { NewOrderTableProps } from "../../shared/prop-types/TablesProps";
 
-import RecentOrders from "../Cart/components/RecentOrders";
-import TotalProducts from "./components/TotalProducts";
-import TotalProfit from "./components/TotalProfit";
-import OrdersToday from "./components/OrdersToday";
-import Subscriptions from "./components/Subscriptions";
 import WeeklyStat from "./components/WeeklyStat";
 import Reservations from "./components/Reservations";
 import TotalBookings from "./components/TotalBookings";
+import TotalBookings2 from "./components/TotalBookings2";
+import TotalBookings3 from "./components/TotalBookings3";
+import TotalBookings4 from "./components/TotalBookings4";
+import BTC from "./components/BTC"
 
 import {
   GetAddToCart,
@@ -40,19 +39,20 @@ const Dashboard = ({ GetAddToCart, carts, newOrder }) => {
     <Container className="dashboard">
       <Row>
         <TotalBookings />
-        <TotalProducts />
-        <TotalProfit />
-        <OrdersToday />
+        <TotalBookings2 />
+        <TotalBookings3 />
+        <TotalBookings4 />
+
         <NewOrders newOrder={newOrder} carts={carts} />
         <NewOrders newOrder={newOrder} />
       </Row>
       <Row>
         <ShortReminders />
-        <SalesReport />
+        <BTC />
         <NewOrders newOrder={newOrder} />
         <NewOrders newOrder={newOrder} />
-        <Reservations />
         <WeeklyStat />
+        
       </Row>
     </Container>
   );

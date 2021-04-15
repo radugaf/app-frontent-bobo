@@ -10,7 +10,7 @@ const invoiceData = [
 ];
 
 const InvoiceTemplate = () => (
-  <Col lg={12}>
+    <Col lg={12}>
     <Card>
       <CardBody className="invoice">
         <div className="invoice__head">

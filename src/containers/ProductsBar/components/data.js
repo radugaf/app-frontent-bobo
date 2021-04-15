@@ -3,7 +3,7 @@
 //   { value: "Apa", label: "Apa" },
 //   { value: "Bauturi-Energizante", label: "Bauturi Energizante" },
 //   { value: "Mixere", label: "Mixere"},
- 
+
 // ];
 
 // export const vinuri = [
@@ -327,6 +327,3 @@ export const groupedOptions8 = [
     options: dulce,
   },
 ];
-
-
-
