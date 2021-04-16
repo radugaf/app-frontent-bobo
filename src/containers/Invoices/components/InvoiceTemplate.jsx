@@ -128,14 +128,14 @@ const InvoiceTemplate = () => {
             <p className="invoice__grand-total">Grand Total: 146.00 RON</p>
             <ButtonToolbar className="invoice__toolbar">
               <Button
-                className="margin-left-custom"
+                className="margin-left-custom btn-custom2"
                 color="danger"
                 onClick={toggle2}
               >
                 Report
               </Button>
               <Modal
-                style={{ maxWidth: "1000px", width: "100%" }}
+                style={{ maxWidth: "1000px" }}
                 isOpen={modal2}
                 toggle={toggle2}
               >
@@ -161,13 +161,12 @@ const InvoiceTemplate = () => {
                   </Button>
                 </ModalFooter>
               </Modal>
-              <Button>Print</Button>
-              <Button onClick={toggle} className="btn btn-success">
+              <Button className='btn-custom2'>Print</Button>
+              <Button onClick={toggle} className="btn btn-success btn-custom2">
                 Mark as Paid
               </Button>
               <Modal
-                size="lg"
-                style={{ maxWidth: "1000px", width: "100%" }}
+                style={{ maxWidth: "1000px" }}
                 isOpen={modal}
                 toggle={toggle}
               >
@@ -243,9 +242,9 @@ const InvoiceTemplate = () => {
                     </Col>
                   </Row>
                 </ModalBody>
-                <ModalFooter>
-                  <div style={{ width: "100%", display: "flex" }}>
-                    <Col lg="6" md="12">
+                <ModalFooter style={{ maxWidth: "1000px" }}>
+                  <Row className='input-custom-row'>
+                    <Col lg="6" md="6">
                       <Form style={{ width: "100%" }}>
                         <FormGroup>
                           <InputGroup>
@@ -257,7 +256,7 @@ const InvoiceTemplate = () => {
                         </FormGroup>
                       </Form>
                     </Col>
-                    <Col lg="6" md="12">
+                    <Col lg="6" md="6">
                       <Form style={{ width: "100%", position: "relative" }}>
                         <Input
                           style={{ opacity: "0", padding: "10px" }}
@@ -273,12 +272,12 @@ const InvoiceTemplate = () => {
                         </Button>
                       </Form>
                     </Col>
-                  </div>
+                  </Row>
                 </ModalFooter>
                 <ModalFooter>
-                  <Button color="primary" onClick={toggle}>
-                    Plateste
-                  </Button>
+                <Button onClick={toggle} className="btn btn-success">
+                Mark as Paid
+              </Button>
                   <Button color="secondary" onClick={toggle}>
                     Anuleaza
                   </Button>

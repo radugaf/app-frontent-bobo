@@ -74,3 +74,16 @@ img {
   left: 0;
   width: 100%;
 }
+
+.input-custom-row {
+  width: 100% !important;
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 768px) {
+  .btn-custom2 {
+      width:100% !important;
+      margin-top: 10px;
+  }
+}
