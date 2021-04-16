@@ -64,5 +64,13 @@ img {
 }
 
 .margin-left-custom {
-  margin-right: auto;
+  margin-right: auto !important;
+}
+
+.custom-modal-button {
+  position: absolute !important;
+  top: -2px;
+  pointer-events: none;
+  left: 0;
+  width: 100%;
 }

@@ -5,6 +5,7 @@ import { Check } from "react-feather";
 
 import {
   Label,
+  FormText,
   Form,
   InputGroup,
   InputGroupAddon,
@@ -126,6 +127,40 @@ const InvoiceTemplate = () => {
             <p>VAT: 20.00 RON</p>
             <p className="invoice__grand-total">Grand Total: 146.00 RON</p>
             <ButtonToolbar className="invoice__toolbar">
+            <Button
+                    className="margin-left-custom"
+                    color="danger"
+                    onClick={toggle2}
+                  >
+                    Report
+                  </Button>
+                  <Modal
+                    style={{ maxWidth: "1000px", width: "100%" }}
+                    isOpen={modal2}
+                    toggle={toggle2}
+                  >
+                    <ModalHeader toggle={toggle2}>Raporteaza :</ModalHeader>
+                    <ModalBody>
+                      <FormGroup style={{ height: "400px" }}>
+                        <Input
+                          style={{ height: "100%" }}
+                          type="textarea"
+                          name="text"
+                          id="exampleText"
+                          placeholder="Subiect"
+                        />
+                      </FormGroup>
+                    </ModalBody>
+                    <ModalFooter>
+                      {" "}
+                      <Button color="success" onClick={toggle2}>
+                        Trimite
+                      </Button>
+                      <Button color="secondary" onClick={toggle2}>
+                        Anuleaza
+                      </Button>
+                    </ModalFooter>
+                  </Modal>
               <Button>Print</Button>
               <Button onClick={toggle} className="btn btn-success">
                 Mark as Paid
@@ -139,7 +174,7 @@ const InvoiceTemplate = () => {
                 <ModalHeader toggle={toggle}>Modal title</ModalHeader>
                 <ModalBody>
                   <Row>
-                    <Col md={12} lg={6}>
+                    <Col md={12} lg={5}>
                       <Table>
                         <tbody>
                           <tr>
@@ -173,31 +208,35 @@ const InvoiceTemplate = () => {
                         </tbody>
                       </Table>
                     </Col>
-                    <Col md={12} lg={6}>
-                      <Table>
-                        <tbody>
-                          <tr>
-                            <th>Produs :</th>
-                            <td>Oua</td>
-                          </tr>
-                          <tr>
-                            <th>Produs :</th>
-                            <td>Lapte</td>
-                          </tr>{" "}
-                          <tr>
-                            <th>Produs :</th>
-                            <td>Carne</td>
-                          </tr>{" "}
-                          <tr>
-                            <th>Produs :</th>
-                            <td>Bere</td>
-                          </tr>
-                        </tbody>
-                      </Table>
+                    <Col md={12} lg={7}>
+                    <Table className="table--bordered" responsive>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Unit Cost</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {invoiceData.map((item, index) => (
+                <tr key={`index_${item.title}`}>
+                  <td>{index + 1}</td>
+                  <td>{item.title}</td>
+                  <td>{item.quantity}</td>
+                  <td>{item.cost} RON</td>
+                  <td>{item.quantity * item.cost} RON</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
                     </Col>
                   </Row>
                 </ModalBody>
                 <ModalFooter>
+                  <div style={{width: "100%", display: "flex"}}>
+                    <Col lg='6' md='12'>
                   <Form style={{ width: "100%" }}>
                     <FormGroup>
                       <InputGroup>
@@ -208,42 +247,19 @@ const InvoiceTemplate = () => {
                       </InputGroup>
                     </FormGroup>
                   </Form>
+                  </Col>
+                  <Col lg='6' md='12'>
+                  <Form style={{ width: "100%", position: "relative" }}>
+                  <Input style={{opacity: "0", padding: "10px"}} type="file" name="file" id="exampleFile" />
+                  <Button color="secondary" className='custom-modal-button'>
+                    Incarca Dovada
+                  </Button>
+
+                  </Form>
+                  </Col>
+                  </div>
                 </ModalFooter>
                 <ModalFooter>
-                  <Button
-                    className="margin-left-custom"
-                    color="danger"
-                    onClick={toggle2}
-                  >
-                    Report
-                  </Button>
-                  <Modal
-                    style={{ maxWidth: "1000px", width: "100%" }}
-                    isOpen={modal2}
-                    toggle={toggle2}
-                  >
-                    <ModalHeader toggle={toggle2}>Raporteaza :</ModalHeader>
-                    <ModalBody>
-                      <FormGroup style={{ height: "400px" }}>
-                        <Input
-                          style={{ height: "100%" }}
-                          type="textarea"
-                          name="text"
-                          id="exampleText"
-                          placeholder="Subiect"
-                        />
-                      </FormGroup>
-                    </ModalBody>
-                    <ModalFooter>
-                      {" "}
-                      <Button color="success" onClick={toggle}>
-                        Trimite
-                      </Button>
-                      <Button color="secondary" onClick={toggle}>
-                        Anuleaza
-                      </Button>
-                    </ModalFooter>
-                  </Modal>
                   <Button color="primary" onClick={toggle}>
                     Plateste
                   </Button>
