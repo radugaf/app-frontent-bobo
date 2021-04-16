@@ -127,40 +127,40 @@ const InvoiceTemplate = () => {
             <p>VAT: 20.00 RON</p>
             <p className="invoice__grand-total">Grand Total: 146.00 RON</p>
             <ButtonToolbar className="invoice__toolbar">
-            <Button
-                    className="margin-left-custom"
-                    color="danger"
-                    onClick={toggle2}
-                  >
-                    Report
+              <Button
+                className="margin-left-custom"
+                color="danger"
+                onClick={toggle2}
+              >
+                Report
+              </Button>
+              <Modal
+                style={{ maxWidth: "1000px", width: "100%" }}
+                isOpen={modal2}
+                toggle={toggle2}
+              >
+                <ModalHeader toggle={toggle2}>Raporteaza :</ModalHeader>
+                <ModalBody>
+                  <FormGroup style={{ height: "400px" }}>
+                    <Input
+                      style={{ height: "100%" }}
+                      type="textarea"
+                      name="text"
+                      id="exampleText"
+                      placeholder="Subiect"
+                    />
+                  </FormGroup>
+                </ModalBody>
+                <ModalFooter>
+                  {" "}
+                  <Button color="success" onClick={toggle2}>
+                    Trimite
                   </Button>
-                  <Modal
-                    style={{ maxWidth: "1000px", width: "100%" }}
-                    isOpen={modal2}
-                    toggle={toggle2}
-                  >
-                    <ModalHeader toggle={toggle2}>Raporteaza :</ModalHeader>
-                    <ModalBody>
-                      <FormGroup style={{ height: "400px" }}>
-                        <Input
-                          style={{ height: "100%" }}
-                          type="textarea"
-                          name="text"
-                          id="exampleText"
-                          placeholder="Subiect"
-                        />
-                      </FormGroup>
-                    </ModalBody>
-                    <ModalFooter>
-                      {" "}
-                      <Button color="success" onClick={toggle2}>
-                        Trimite
-                      </Button>
-                      <Button color="secondary" onClick={toggle2}>
-                        Anuleaza
-                      </Button>
-                    </ModalFooter>
-                  </Modal>
+                  <Button color="secondary" onClick={toggle2}>
+                    Anuleaza
+                  </Button>
+                </ModalFooter>
+              </Modal>
               <Button>Print</Button>
               <Button onClick={toggle} className="btn btn-success">
                 Mark as Paid
@@ -179,84 +179,100 @@ const InvoiceTemplate = () => {
                         <tbody>
                           <tr>
                             <th>Numar Factura</th>
-                            <td>{invoiceNumber}</td>
+                            <td className="custom-td">{invoiceNumber}
+                            <CopyToClipboard
+                                className="invoice-address-custom-button"
+                                onCopy={onCopy}
+                                text={invoiceNumber}
+                              >
+                                <button>Copy!</button>
+                              </CopyToClipboard></td>
                           </tr>
                           <tr>
                             <th>Data</th>
-                            <td>12.02.2021</td>
+                            <td className="custom-td">
+                              12.02.2021
+                            </td>
                           </tr>
                           <tr>
                             <th>Nume Restaurant</th>
-                            <td>Ceva restaurant</td>
+                            <td className="custom-td">Ceva restaurant</td>
                           </tr>
                           <tr>
                             <th>Nume supplier</th>
-                            <td>Kaufland</td>
+                            <td className="custom-td">Kaufland</td>
                           </tr>
                           <tr>
                             <th>Suma fara TVA</th>
-                            <td>130 Ron</td>
+                            <td className="custom-td">130 Ron</td>
                           </tr>
                           <tr>
                             <th>TVA</th>
-                            <td>20 Ron</td>
+                            <td className="custom-td">20 Ron</td>
                           </tr>
                           <tr>
                             <th>Suma Totala</th>
-                            <td>150 Ron</td>
+                            <td className="custom-td">150 Ron</td>
                           </tr>
                         </tbody>
                       </Table>
                     </Col>
                     <Col md={12} lg={7}>
-                    <Table className="table--bordered" responsive>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Item Name</th>
-                <th>Quantity</th>
-                <th>Unit Cost</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {invoiceData.map((item, index) => (
-                <tr key={`index_${item.title}`}>
-                  <td>{index + 1}</td>
-                  <td>{item.title}</td>
-                  <td>{item.quantity}</td>
-                  <td>{item.cost} RON</td>
-                  <td>{item.quantity * item.cost} RON</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+                      <Table className="table--bordered" responsive>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Unit Cost</th>
+                            <th>Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {invoiceData.map((item, index) => (
+                            <tr key={`index_${item.title}`}>
+                              <td>{index + 1}</td>
+                              <td>{item.title}</td>
+                              <td>{item.quantity}</td>
+                              <td>{item.cost} RON</td>
+                              <td>{item.quantity * item.cost} RON</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </Table>
                     </Col>
                   </Row>
                 </ModalBody>
                 <ModalFooter>
-                  <div style={{width: "100%", display: "flex"}}>
-                    <Col lg='6' md='12'>
-                  <Form style={{ width: "100%" }}>
-                    <FormGroup>
-                      <InputGroup>
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>Plateste partial</InputGroupText>
-                        </InputGroupAddon>
-                        <Input value="125 Ron" />
-                      </InputGroup>
-                    </FormGroup>
-                  </Form>
-                  </Col>
-                  <Col lg='6' md='12'>
-                  <Form style={{ width: "100%", position: "relative" }}>
-                  <Input style={{opacity: "0", padding: "10px"}} type="file" name="file" id="exampleFile" />
-                  <Button color="secondary" className='custom-modal-button'>
-                    Incarca Dovada
-                  </Button>
-
-                  </Form>
-                  </Col>
+                  <div style={{ width: "100%", display: "flex" }}>
+                    <Col lg="6" md="12">
+                      <Form style={{ width: "100%" }}>
+                        <FormGroup>
+                          <InputGroup>
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>Plateste partial</InputGroupText>
+                            </InputGroupAddon>
+                            <Input value="125 Ron" />
+                          </InputGroup>
+                        </FormGroup>
+                      </Form>
+                    </Col>
+                    <Col lg="6" md="12">
+                      <Form style={{ width: "100%", position: "relative" }}>
+                        <Input
+                          style={{ opacity: "0", padding: "10px" }}
+                          type="file"
+                          name="file"
+                          id="exampleFile"
+                        />
+                        <Button
+                          color="secondary"
+                          className="custom-modal-button"
+                        >
+                          Incarca Dovada
+                        </Button>
+                      </Form>
+                    </Col>
                   </div>
                 </ModalFooter>
                 <ModalFooter>
