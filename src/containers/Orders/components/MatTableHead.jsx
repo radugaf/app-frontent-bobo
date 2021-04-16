@@ -1,44 +1,33 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import TableHead from "@material-ui/core/TableHead";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import Checkbox from "@material-ui/core/Checkbox";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
-import { RTLProps } from "../../../shared/prop-types/ReducerProps";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import TableHead from '@material-ui/core/TableHead';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import Checkbox from '@material-ui/core/Checkbox';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+import { RTLProps } from '../../../shared/prop-types/ReducerProps';
 
 const rows = [
   {
-    id: "image",
-    disablePadding: true,
-    label: "IMG",
+    id: 'image', disablePadding: true, label: 'Img',
   },
   {
-    id: "name",
-    disablePadding: true,
-    label: "Produs",
+    id: 'name', disablePadding: true, label: 'Produs',
   },
   {
-    id: "calories",
-    disablePadding: false,
-    label: "Price",
+    id: 'calories', disablePadding: false, label: 'Pret',
   },
   {
-    id: "fat",
-    disablePadding: false,
-    label: "QTY Input",
+    id: 'fat', disablePadding: false, label: 'Cantitate Livrata',
   },
   {
-    id: "um",
-    disablePadding: false,
-    label: "U.M.",
+    id: 'carbs', disablePadding: false, label: 'U.M.',
   },
-  {
-    id: "total",
-    disablePadding: false,
-    label: "Total",
-  },
+  // {
+  //   id: 'carbs', disablePadding: false, label: 'Cota TVA%',
+  // },
+ 
 ];
 
 const createSortHandler = (property, onRequestSort) => (event) => {
@@ -46,32 +35,24 @@ const createSortHandler = (property, onRequestSort) => (event) => {
 };
 
 const MatTableHead = ({
-  onSelectAllClick,
-  order,
-  orderBy,
-  numSelected,
-  rowCount,
-  rtl,
-  onRequestSort,
+  onSelectAllClick, order, orderBy, numSelected, rowCount, rtl, onRequestSort,
 }) => (
   <TableHead>
     <TableRow>
       <TableCell padding="checkbox">
         <Checkbox
-          className={`material-table__checkbox ${
-            numSelected === rowCount && "material-table__checkbox--checked"
-          }`}
+          className={`material-table__checkbox ${numSelected === rowCount && 'material-table__checkbox--checked'}`}
           indeterminate={numSelected > 0 && numSelected < rowCount}
           checked={numSelected === rowCount}
           onChange={onSelectAllClick}
         />
       </TableCell>
-      {rows.map((row) => (
+      {rows.map(row => (
         <TableCell
           className="material-table__cell material-table__cell--sort material-table__cell-right"
           key={row.id}
-          align={rtl.direction === "rtl" ? "right" : "left"}
-          padding={row.disablePadding ? "none" : "default"}
+          align={rtl.direction === 'rtl' ? 'right' : 'left'}
+          padding={row.disablePadding ? 'none' : 'default'}
           sortDirection={orderBy === row.id ? order : false}
         >
           <TableSortLabel
@@ -99,6 +80,6 @@ MatTableHead.propTypes = {
   rtl: RTLProps.isRequired,
 };
 
-export default connect((state) => ({
+export default connect(state => ({
   rtl: state.rtl,
 }))(MatTableHead);
