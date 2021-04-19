@@ -19,7 +19,6 @@ const ProfileMain = () => (
             <p className="profile__work">Restaurant Name</p>
             <p className="profile__contact">User Email</p>
             <p className="profile__contact" dir="ltr">User Phone Number</p>
-            <Button color="primary" className="icon profile__btn"><p><MessageTextOutlineIcon /> Default Button</p></Button>
           </div>
         </div>
         <div className="profile__stats">

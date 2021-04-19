@@ -2,6 +2,10 @@ import { Fragment, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { Check } from "react-feather";
+import BasicCarouselWithCaption from "./BasicCarouselWithCaption";
+import { Field, reduxForm } from "redux-form";
+import renderFileInputField from "../../../shared/components/form/FileInput";
+import PropTypes from 'prop-types';
 
 import {
   Label,
@@ -161,7 +165,7 @@ const InvoiceTemplate = () => {
                   </Button>
                 </ModalFooter>
               </Modal>
-              <Button className='btn-custom2'>Print</Button>
+              <Button className="btn-custom2">Print</Button>
               <Button onClick={toggle} className="btn btn-success btn-custom2">
                 Mark as Paid
               </Button>
@@ -172,78 +176,10 @@ const InvoiceTemplate = () => {
               >
                 <ModalHeader toggle={toggle}>Modal title</ModalHeader>
                 <ModalBody>
-                  <Row>
-                    <Col md={12} lg={5}>
-                      <Table>
-                        <tbody>
-                          <tr>
-                            <th>Numar Factura</th>
-                            <td className="custom-td">{invoiceNumber}
-                            <CopyToClipboard
-                                className="invoice-address-custom-button"
-                                onCopy={onCopy}
-                                text={invoiceNumber}
-                              >
-                                <button>Copy!</button>
-                              </CopyToClipboard></td>
-                          </tr>
-                          <tr>
-                            <th>Data</th>
-                            <td className="custom-td">
-                              12.02.2021
-                            </td>
-                          </tr>
-                          <tr>
-                            <th>Nume Restaurant</th>
-                            <td className="custom-td">Ceva restaurant</td>
-                          </tr>
-                          <tr>
-                            <th>Nume supplier</th>
-                            <td className="custom-td">Kaufland</td>
-                          </tr>
-                          <tr>
-                            <th>Suma fara TVA</th>
-                            <td className="custom-td">130 Ron</td>
-                          </tr>
-                          <tr>
-                            <th>TVA</th>
-                            <td className="custom-td">20 Ron</td>
-                          </tr>
-                          <tr>
-                            <th>Suma Totala</th>
-                            <td className="custom-td">150 Ron</td>
-                          </tr>
-                        </tbody>
-                      </Table>
-                    </Col>
-                    <Col md={12} lg={7}>
-                      <Table className="table--bordered" responsive>
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Item Name</th>
-                            <th>Quantity</th>
-                            <th>Unit Cost</th>
-                            <th>Total</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {invoiceData.map((item, index) => (
-                            <tr key={`index_${item.title}`}>
-                              <td>{index + 1}</td>
-                              <td>{item.title}</td>
-                              <td>{item.quantity}</td>
-                              <td>{item.cost} RON</td>
-                              <td>{item.quantity * item.cost} RON</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </Table>
-                    </Col>
-                  </Row>
+                  <BasicCarouselWithCaption />
                 </ModalBody>
                 <ModalFooter style={{ maxWidth: "1000px" }}>
-                  <Row className='input-custom-row'>
+                  <Row className="input-custom-row">
                     <Col lg="6" md="6">
                       <Form style={{ width: "100%" }}>
                         <FormGroup>
@@ -257,7 +193,18 @@ const InvoiceTemplate = () => {
                       </Form>
                     </Col>
                     <Col lg="6" md="6">
-                      <Form style={{ width: "100%", position: "relative" }}>
+                        <div className="form__form-group">
+                          <span className="form__form-group-label">
+                            Adauga Dovada
+                          </span>
+                          <div className="form__form-group-field">
+                            <Field
+                              name="file"
+                              component={renderFileInputField}
+                            />
+                          </div>
+                        </div>
+                      {/* <Form style={{ width: "100%", position: "relative" }}>
                         <Input
                           style={{ opacity: "0", padding: "10px" }}
                           type="file"
@@ -270,14 +217,14 @@ const InvoiceTemplate = () => {
                         >
                           Incarca Dovada
                         </Button>
-                      </Form>
+                      </Form> */}
                     </Col>
                   </Row>
                 </ModalFooter>
                 <ModalFooter>
-                <Button onClick={toggle} className="btn btn-success">
-                Mark as Paid
-              </Button>
+                  <Button onClick={toggle} className="btn btn-success">
+                    Mark as Paid
+                  </Button>
                   <Button color="secondary" onClick={toggle}>
                     Anuleaza
                   </Button>
@@ -291,4 +238,13 @@ const InvoiceTemplate = () => {
   );
 };
 
-export default InvoiceTemplate;
+InvoiceTemplate.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
+};
+
+export default reduxForm({
+  form: 'horizontal_form', // a unique identifier for this form
+})(InvoiceTemplate);
+
+

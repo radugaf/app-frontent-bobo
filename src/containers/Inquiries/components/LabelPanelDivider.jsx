@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Panel from '../../../shared/components/Panel';
 
 const LabelPanelDivider = () => {
+  
   const { t } = useTranslation('common');
 
   return (
