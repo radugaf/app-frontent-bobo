@@ -21,6 +21,7 @@ const reducer = combineReducers({
   toastr: toastrReducer,
   newOrder: newOrderTableReducer,
   products,
+  toastr: toastrReducer,
 });
 
 const store = createStore(

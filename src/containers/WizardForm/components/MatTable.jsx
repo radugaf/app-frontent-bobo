@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardBody, Col } from "reactstrap";
-import { connect } from "react-redux";
-
+import { URL } from "../../../requests";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Checkbox from "@material-ui/core/Checkbox";
 import TablePagination from "@material-ui/core/TablePagination";
+import TextField from "@material-ui/core/TextField";
 
 import MatTableHead from "./MatTableHead";
 import MatTableToolbar from "./MatTableToolbar";
-import { SupplierInvoiceFetch } from "../../../redux/actions/products";
+
+import { GetInquires } from "../../../redux/actions/products";
+import { connect } from "react-redux";
 
 const getSorting = (order, orderBy) => {
   if (order === "desc") {
@@ -36,18 +38,16 @@ const getSorting = (order, orderBy) => {
   };
 };
 
-const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
+const MatTable = ({ inquires, GetInquires, data }) => {
   const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("invoice_number");
+  const [orderBy, setOrderBy] = useState("calories");
   const [selected, setSelected] = useState(new Map([]));
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentQty, setCurrentQty] = React.useState(new Map([]));
 
-  useEffect(() => {
-    SupplierInvoiceFetch();
-  }, []);
-
-  const handleRequestSort = (property) => {
+  const handleRequestSort = (event, property) => {
+    console.log({property,orderBy})
     const orderByTemp = property;
     let orderTemp = "desc";
     if (orderBy === property && order === "desc") {
@@ -57,21 +57,37 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
     setOrderBy(orderByTemp);
   };
 
-  const handleSelectAllClick = (checked) => {
+  useEffect(() => {
+    GetInquires();
+  }, []);
+
+  const onChangeValueUpdate = (e, currentinq, index) => {
+    const inquiry = currentinq[index];
+    console.log({ inquiry, index });
+    const updatedQty = +e.target.value;
+    const newcurrentQty = new Map(currentQty);
+    const value = newcurrentQty.get(inquiry.product_item_id);
+    let qty = updatedQty;
+    newcurrentQty.set(inquiry.product_item_id, {
+      ...inquiry,
+      updateQty: updatedQty,
+    });
+    console.log({ newcurrentQty });
+    setCurrentQty(newcurrentQty);
+  };
+
+  const handleSelectAllClick = (event, checked) => {
     if (checked) {
       const newSelected = new Map();
-      data.map((n) => newSelected.set(n.id, true));
+      data.map((n) => newSelected.set(n.product_item_id, true));
       setSelected(newSelected);
-      setSelectedData(newSelected)
       return;
     }
     setSelected(new Map([]));
-    setSelectedData(new Map([]))
   };
 
   // HandleSingle chekcbox click
-  const handleClick = (e,id) => {
-    console.log({id})
+  const handleClick = (event, id) => {
     const newSelected = new Map(selected);
     const value = newSelected.get(id);
     let isActive = true;
@@ -80,36 +96,34 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
     }
     newSelected.set(id, isActive);
     setSelected(newSelected);
-    setSelectedData(newSelected)
   };
 
-  const handleChangePage = (item,page) => {
-    setPage(page);
+  const handleChangePage = (event, item) => {
+    setPage(item);
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(Number(event.target.value));
   };
 
-  const isSelected = (id) => !!selected.get(id)
-
+  const isSelected = (id) => !!selected.get(id);
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
   return (
-    <Col lg={12}>
+    <Col md={12} lg={12}>
       <Card>
         <CardBody>
           <div className="card__title">
-            <h3 className="bold-text">🧾 FACTURI PROFORME</h3>
+
           </div>
-          {/* <MatTableToolbar
-              selectedData={[...selected]
-                .filter((el) => el[1])
-                .map((el) => el[0])}
-              numSelected={[...selected].filter((el) => el[1]).length}
-              onRequestSort={handleRequestSort}
-            /> */}
+          <MatTableToolbar
+            selectedData={currentQty}
+            checkedData={[...selected].filter((el) => el[1])}
+            numSelected={[...selected].filter((el) => el[1]).length}
+            handleDeleteSelected={(e) => console.log(e)}
+            onRequestSort={handleRequestSort}
+          />
           <div className="material-table__wrap">
             <Table className="material-table">
               <MatTableHead
@@ -124,18 +138,18 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
                 {data
                   .sort(getSorting(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((d) => {
-                    const select = isSelected(d.id);
-                    console.log({id:d.id})
-                    console.log({select})
+                  .map((d, index) => {
+                    const select = isSelected(d.product_item_id);
                     return (
                       <TableRow
                         className="material-table__row"
                         role="checkbox"
-                        onClick={(event) => handleClick(event, d.id)}
+                        onClick={(event) =>
+                          handleClick(event, d.product_item_id)
+                        }
                         aria-checked={select}
                         tabIndex={-1}
-                        key={d.id}
+                        key={d.product_item_id}
                         selected={select}
                       >
                         <TableCell
@@ -148,13 +162,15 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
                           />
                         </TableCell>
                         <TableCell
-                          className="material-table__cell material-table__cell-right"
-                          component="th"
-                          scope="row"
-                          padding="none"
-                        >
-                          {d.invoice_number}
-                        </TableCell>
+                            className="material-table__cell material-table__cell-right"
+                            component="th"
+                            scope="row"
+                            padding="none"
+                          >
+                            <div className="circle_square">
+                              <img src={`${URL}${d.product_image_url}`}></img>
+                            </div>
+                          </TableCell>
                         <TableCell
                           className="material-table__cell material-table__cell-right"
                           component="th"
@@ -164,7 +180,31 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
                           {d.product_title}
                         </TableCell>
                         <TableCell className="material-table__cell material-table__cell-right">
-                          {d.final_price} RON
+                          {d.original_price}
+                        </TableCell>
+                        <TableCell className="material-table__cell material-table__cell-right">
+                          {d.quantity_by_restaurant}
+                        </TableCell>
+                        <TableCell className="material-table__cell material-table__cell-right">
+                          <TextField
+                            id="standard-basic"
+                            label="Cantiate disponibila"
+                            onBlur={(e) => onChangeValueUpdate(e, data, index)}
+                            
+                          />
+                        </TableCell>
+                        <TableCell className="material-table__cell material-table__cell-right">
+                          9%
+                        </TableCell>
+                        <TableCell className="material-table__cell material-table__cell-right">
+                          <TextField
+                            id="standard-basic"
+                            label="%"
+                            onBlur={(e) => onChangeValueUpdate(e, data, index)}
+                          />
+                        </TableCell>
+                        <TableCell className="material-table__cell material-table__cell-right">
+                          {d.total}
                         </TableCell>
                       </TableRow>
                     );
@@ -187,7 +227,7 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
             nextIconButtonProps={{ "aria-label": "Next Page" }}
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
-            nextIGetInPerPageOptions={[5, 10, 15]}
+            rowsPerPageOptions={[5, 10, 15]}
             dir="ltr"
             SelectProps={{
               inputProps: { "aria-label": "rows per page" },
@@ -202,10 +242,11 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
 
 const mapStateToProps = (state) => {
   return {
-    invoices: state.products.invoiceDetails,
+    inquires: state.products.inquiredDetails,
     user: state.products.user,
   };
 };
+
 export default connect(mapStateToProps, {
-  SupplierInvoiceFetch,
+  GetInquires,
 })(MatTable);

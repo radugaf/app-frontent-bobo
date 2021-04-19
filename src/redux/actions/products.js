@@ -144,6 +144,9 @@ export const AddToCart = (data) => {
         tokenConfig(getState)
       );
       console.log({ addToCartProduct });
+      toastr.success(
+        "Product Successfully add in card"
+      );
       // dispatch({ type: "ADD_TO_CART", payload: addToCartProduct.data });
       await checkUserType(dispatch, getState);
 
@@ -648,7 +651,7 @@ export const errorHandle = (error, dispatch) => {
   });
   dispatch({
     type: "ERROR",
-    payload: { error: error.response.data },
+    payload: { error: error?.response?.data },
   });
 };
 

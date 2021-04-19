@@ -10,7 +10,7 @@ import { RTLProps } from '../../../shared/prop-types/ReducerProps';
 
 const rows = [
   {
-    id: 'image', disablePadding: true, label: 'Img',
+    id: 'img', disablePadding: true, label: 'IMG',
   },
   {
     id: 'name', disablePadding: true, label: 'Produs',
@@ -19,14 +19,20 @@ const rows = [
     id: 'calories', disablePadding: false, label: 'Pret',
   },
   {
-    id: 'fat', disablePadding: false, label: 'Cantitate Livrata',
+    id: 'fat', disablePadding: false, label: 'Cantitate Dorita',
   },
   {
-    id: 'carbs', disablePadding: false, label: 'U.M.',
+    id: 'carbs', disablePadding: false, label: 'Cantitate Disponibila',
   },
-  // {
-  //   id: 'carbs', disablePadding: false, label: 'Cota TVA%',
-  // },
+  {
+    id: 'tva', disablePadding: false, label: 'Cota TVA%',
+  },
+  {
+    id: 'discount', disablePadding: false, label: 'Discount %',
+  },
+  {
+    id: 'total', disablePadding: false, label: 'Total',
+  },
  
 ];
 

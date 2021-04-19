@@ -6,7 +6,8 @@ import '../../scss/app.scss';
 import Router from './Router';
 import store from './store';
 import ScrollToTop from './ScrollToTop';
-import ReduxToastr from "react-redux-toastr";
+import ReduxToastr from 'react-redux-toastr'
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
 class App extends Component {
   constructor() {
@@ -40,10 +41,10 @@ class App extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-        {/* <ReduxToastr
+        <ReduxToastr
             getState={(state) => state.toastr} 
             {...alertOptions}
-          /> */}
+          />
           <ScrollToTop>
             <Fragment>
               {!loaded

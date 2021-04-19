@@ -11,6 +11,7 @@ import {
   SupplierProductFetch,
   tokenConfig,
 } from "../../../redux/actions/products";
+import { toastr } from "react-redux-toastr";
 
 import requests, { URL, BACKEND_URL } from "../../../requests";
 

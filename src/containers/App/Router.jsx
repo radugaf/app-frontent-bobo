@@ -47,7 +47,7 @@ const Pages = () => (
     <Route path="/pages/add-product" component={AddProduct} />
     <Route path="/pages/product-detail" component={ProductDetail} />
     <Route path="/pages/pre-invoice" component={Documents} />
-    <Route path="/pages/driver-form" component={WizardForm} />
+    
   </Switch>
 );
 
@@ -65,6 +65,7 @@ const Router = () => (
     <main>
       <Switch>
         <Route exact path="/log_in" component={Login} />
+        <Route path="/pages/driver-form" component={WizardForm} />
         <Route path="/" component={wrappedRoutes} />
       </Switch>
     </main>

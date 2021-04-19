@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Collapse, Button, ButtonToolbar } from "reactstrap";
+import { Collapse, Button, ButtonToolbar, Card } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import NotificationsIcon from "mdi-react/NotificationsIcon";
@@ -63,6 +63,7 @@ const TopbarNotification = ({ handleSubmit }) => {
         <div className="topbar__collapse-title-wrap">
           <p className="topbar__collapse-title">Cum te putem ajuta?</p>
         </div>
+
         <form className="form form--horizontal" onSubmit={handleSubmit}>
           <div className="form__form-group">
             <Field name="textarea" component="textarea" type="text" placeholder="Ce prob ai patron?" />
@@ -73,6 +74,7 @@ const TopbarNotification = ({ handleSubmit }) => {
             </Button>
           </ButtonToolbar>
         </form>
+   
       </Collapse>
     </div>
   );

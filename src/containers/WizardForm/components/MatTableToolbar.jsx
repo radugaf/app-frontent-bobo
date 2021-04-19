@@ -1,29 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Toolbar from "@material-ui/core/Toolbar";
-import MatTableFilterButton from "./MatTableFilterButton";
-import { connect } from "react-redux";
 import { Button } from "reactstrap";
-import {
-  GetRestaurantOrder,
-  MarkAsDelivery,
-  MarkAsShipped,
-} from "../../../redux/actions/products";
+import MatTableFilterButton from "./MatTableFilterButton";
+
+import { connect } from "react-redux";
+import { GetInquires, UpdateInquiry } from "../../../redux/actions/products";
 
 const MatTableToolbar = ({
-  GetRestaurantOrder,
-  MarkAsDelivery,
+  UpdateInquiry,
+  GetInquires,
+  checkedData,
   selectedData,
   numSelected,
+  handleDeleteSelected,
   onRequestSort,
 }) => {
-  const acceptOrder = async (e) => {
-    e.preventDefault();
-    await MarkAsDelivery({ product_id: selectedData });
-    GetRestaurantOrder();
-    // window.location.href = "/pages/order-history";
+  const onUpdate = (e, type) => {
+    const newSelected = new Map(selectedData);
+    checkedData &&
+      checkedData.forEach((check) => {
+        console.log({ check });
+        const qty = newSelected.get(check[0]);
+        console.log({ qty });
+        if(qty){
+          UpdateInquiry({
+            product_id: qty.product_item_id,
+            inquiry_id: qty.enquiry_id,
+            price: qty.original_price,
+            quantity:
+              type === "accept" ? qty.quantity_by_restaurant : qty.updateQty,
+          });
+        }
+      });
+    GetInquires();
+    // toastr.success("Accept Inquire", "Inquire Accept Successfully");
   };
-
+  console.log({ checkedData });
   return (
     <div className="material-table__toolbar-wrap">
       <Toolbar className="material-table__toolbar">
@@ -36,8 +49,10 @@ const MatTableToolbar = ({
         </div>
         <div>
           {numSelected > 0 ? (
-            <Button onClick={acceptOrder} className="icon" color="success">
-              <p>Livrat</p>
+            <Button onClick={onUpdate} className="icon" color="primary">
+              <p>
+                🔍 Raspunde
+              </p>
             </Button>
           ) : (
             <MatTableFilterButton onRequestSort={onRequestSort} />
@@ -62,7 +77,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  GetRestaurantOrder,
-  MarkAsDelivery,
-  MarkAsShipped,
+  GetInquires,
+  // DeclineInquiry,
+  UpdateInquiry,
 })(MatTableToolbar);
