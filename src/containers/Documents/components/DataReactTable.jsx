@@ -96,7 +96,7 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => 
           <div className="react-table__wrapper">
             <div className="card__title">
               <h3 className="bold-text" data-tip='Aici vin informatiile pe care le vrei tu'>🧾 Achtia Facturi</h3>
-              <ReactTooltip place='right' className='extraClass' delayHide={1000} effect='solid'/>
+              <ReactTooltip place='right' className='extraClass' delayHide={1000} effect='solid'  type='info'/>
             </div>
           </div>
           <ReactTableBase
