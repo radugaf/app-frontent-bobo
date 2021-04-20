@@ -1,7 +1,7 @@
 /* eslint-disable react/no-children-prop */
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, ButtonToolbar } from "reactstrap";
+import { Button, ButtonToolbar, Row, Col } from "reactstrap";
 import { Field, reduxForm } from "redux-form";
 import TextField from "@material-ui/core/TextField";
 
@@ -42,7 +42,11 @@ renderTextField.defaultProps = {
 
 const ProfileSettings = ({ handleSubmit, reset }) => (
   <>
+  <Row>
+    <Col lg={6}>
     <form className="material-form" onSubmit={handleSubmit}>
+    <h3>Profile Info</h3>
+    <br />
       <div>
         <span className="material-form__label">Full Name</span>
         <Field name="username" component={renderTextField} placeholder="Name" />
@@ -65,6 +69,24 @@ const ProfileSettings = ({ handleSubmit, reset }) => (
           type="phone"
         />
       </div>
+      <div>
+        <span className="material-form__label">Titulatura -  admin</span>
+        <Field
+          name="totulatura"
+          component={renderTextField}
+          placeholder="example@mail.com"
+          type="phone"
+        />
+      </div>
+      <div>
+        <span className="material-form__label">Societata Comerciala - admin</span>
+        <Field
+          name="societateComerciala"
+          component={renderTextField}
+          placeholder="example@mail.com"
+          type="phone"
+        />
+      </div>
       {/* <div>
       <span className="material-form__label">Text Area</span>
       <Field
@@ -82,10 +104,8 @@ const ProfileSettings = ({ handleSubmit, reset }) => (
 
       </ButtonToolbar>
     </form>
-
-    <br />
-    <br />
-    <br />
+    </Col>
+    <Col lg={6}>
 
     <form className="material-form" onSubmit={handleSubmit}>
       <h3>Reset Password</h3>
@@ -119,6 +139,8 @@ const ProfileSettings = ({ handleSubmit, reset }) => (
       
       </ButtonToolbar>
     </form>
+    </Col>
+    </Row>
   </>
 );
 

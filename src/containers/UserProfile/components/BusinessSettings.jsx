@@ -40,9 +40,13 @@ renderTextField.defaultProps = {
 
 const BusinessSettings = ({ handleSubmit, reset }) => (
   
-  <form className="material-form" onSubmit={handleSubmit}>
+  
     <Row>
+
     <Col lg={6}>
+    <form className="material-form" onSubmit={handleSubmit}>
+    <h3>Informatii Publice</h3>
+    <br />
     <div>
       <span className="material-form__label">Denumire Brand</span>
       <Field
@@ -92,12 +96,19 @@ const BusinessSettings = ({ handleSubmit, reset }) => (
         placeholder="Orar de functionare"
       />
     </div>
+    <ButtonToolbar className="form__button-toolbar">
+      <Button color="primary" type="submit">Update</Button>
+      <Button type="button" onClick={reset}>
+        Cancel
+      </Button>
+    </ButtonToolbar>
+    </form>
     </Col>
     <Col lg={6}>
-    <div>
-      <span  className="material-form__label">Zone de livrare</span>
-      <CategoryButtons style={{ marginTop: "10px !important"}} />
-    </div>
+    <form className="material-form" onSubmit={handleSubmit}>
+    <h3>Infromatii Interne</h3>
+    <br />
+
     <div>
       <span className="material-form__label">Nume firma</span>
       <Field
@@ -139,6 +150,10 @@ const BusinessSettings = ({ handleSubmit, reset }) => (
       />
     </div>
     <div>
+      <span  className="material-form__label">Zone de livrare</span>
+      <CategoryButtons style={{ marginTop: "10px !important"}} />
+    </div>
+    <div>
       <span className="material-form__label">Platitor de TVA</span>
       <FormGroup tag="fieldset">
         <FormGroup check>
@@ -155,26 +170,17 @@ const BusinessSettings = ({ handleSubmit, reset }) => (
         </FormGroup>
         </FormGroup>
       </div>
-
-    </Col>
-    </Row>
-    {/* <div>
-      <span className="material-form__label">Text Area</span>
-      <Field
-        name="textarea"
-        component={renderTextField}
-        placeholder="Type message here"
-        multiline
-        rowsMax="4"
-      />
-    </div> */}
-    <ButtonToolbar className="form__button-toolbar">
-      <Button color="primary" type="submit">Update profile</Button>
+      <ButtonToolbar className="form__button-toolbar">
+      <Button color="primary" type="submit">Update</Button>
       <Button type="button" onClick={reset}>
         Cancel
       </Button>
     </ButtonToolbar>
-  </form>
+    </form>
+    </Col>
+
+    </Row>
+
 );
 
 BusinessSettings.propTypes = {

@@ -8,7 +8,14 @@ const UserProfile = () => {
     <Container>
       <div className="profile">
         <Row>
-          <ProfileTabs />
+          <Col md={12} lg={12} xl={4}>
+            <Row>
+              <ProfileMain />
+            </Row>
+          </Col>
+          <Col>
+          <ProfileTabs md={12} lg={12} xl={8} />
+          </Col>
         </Row>
       </div>
     </Container>

@@ -21,20 +21,6 @@ const ProfileMain = () => (
             <p className="profile__contact" dir="ltr">User Phone Number</p>
           </div>
         </div>
-        <div className="profile__stats">
-          <div className="profile__stat">
-            <p className="profile__stat-number">0</p>
-            <p className="profile__stat-title">Produse in Asteptare</p>
-          </div>
-          <div className="profile__stat">
-            <p className="profile__stat-number">0</p>
-            <p className="profile__stat-title">Produse Primite</p>
-          </div>
-          <div className="profile__stat">
-            <p className="profile__stat-number">0</p>
-            <p className="profile__stat-title">Numar Facturi</p>
-          </div>
-        </div>
       </CardBody>
     </Card>
   </Col>
