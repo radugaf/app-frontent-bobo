@@ -9,6 +9,7 @@ import {
   SetToken,
   tokenConfig,
 } from "../../../redux/actions/products";
+import ReactTooltip from 'react-tooltip';
 
 import requests, { URL, BACKEND_URL } from "../../../requests";
 
@@ -20,7 +21,10 @@ const reorder = (rows, startIndex, endIndex) => {
   return result;
 };
 
-const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData }) => {
+const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => {
+
+
+
   console.log({ rows: reactTableData.tableRowsData, invoices });
   const [rows, setData] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
@@ -29,6 +33,7 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData }) => {
   const [withDragAndDrop, setWithDragAndDrop] = useState(false);
   const [withPagination, setWithPaginationTable] = useState(true);
   const [withSearchEngine, setWithSearchEngine] = useState(true);
+
 
   const call = async () => {
 
@@ -85,15 +90,15 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData }) => {
     });
 
   return (
-    <Col md={12} lg={6}>
+    <Col md={12} lg={12}>
       <Card>
         <CardBody>
           <div className="react-table__wrapper">
             <div className="card__title">
-              <h3 className="bold-text">🧾 Achtia Facturi</h3>
+              <h3 className="bold-text" data-tip='Aici vin informatiile pe care le vrei tu'>🧾 Achtia Facturi</h3>
+              <ReactTooltip place='right' className='extraClass' delayHide={1000} effect='solid'/>
             </div>
           </div>
-
           <ReactTableBase
             key={
               withSearchEngine || isResizable || isEditable
@@ -132,7 +137,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  SupplierInvoiceFetch,
-  SetToken,
-})(DataReactTable);
+
+export default connect( mapStateToProps, { SupplierInvoiceFetch, SetToken}) (DataReactTable);
