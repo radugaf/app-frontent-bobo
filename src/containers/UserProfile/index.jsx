@@ -8,11 +8,6 @@ const UserProfile = () => {
     <Container>
       <div className="profile">
         <Row>
-          <Col md={12} lg={12} xl={4}>
-            <Row>
-              <ProfileMain />
-            </Row>
-          </Col>
           <ProfileTabs />
         </Row>
       </div>

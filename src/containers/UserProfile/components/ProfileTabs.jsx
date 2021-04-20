@@ -22,7 +22,7 @@ const ProfileTabs = () => {
   };
 
   return (
-    <Col md={12} lg={12} xl={8}>
+    <Col md={12} lg={12} xl={12}>
       <Card>
         <div className="profile__card tabs tabs--bordered-bottom">
           <div className="tabs__wrap">

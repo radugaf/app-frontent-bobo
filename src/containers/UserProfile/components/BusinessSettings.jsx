@@ -1,9 +1,10 @@
 /* eslint-disable react/no-children-prop */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonToolbar } from 'reactstrap';
+import { Button, ButtonToolbar, Col, Row, Label, Input, FormGroup } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
+import CategoryButtons from "./CategoryButtons";
 
 const renderTextField = ({
   input, label, meta: { touched, error }, children,
@@ -38,41 +39,125 @@ renderTextField.defaultProps = {
 };
 
 const BusinessSettings = ({ handleSubmit, reset }) => (
+  
   <form className="material-form" onSubmit={handleSubmit}>
+    <Row>
+    <Col lg={6}>
     <div>
-      <span className="material-form__label">Nume Companie</span>
+      <span className="material-form__label">Denumire Brand</span>
       <Field
-        name="name"
+        name="brandName"
         component={renderTextField}
-        placeholder="Name"
+        placeholder="Denumire Brand"
+      />
+    </div>
+
+    <div>
+      <span className="material-form__label">Telefon Contact</span>
+      <Field
+        name="telefonContact"
+        component={renderTextField}
+        placeholder="Numarul de telefon pentru contact"
+      />
+    </div>
+    <div>
+      <span className="material-form__label">Adresa Contact</span>
+      <Field
+        name="adresaContact"
+        component={renderTextField}
+        placeholder="Adresa de contact"
+      />
+    </div>
+    <div>
+      <span className="material-form__label">Website</span>
+      <Field
+        name="webstite"
+        component={renderTextField}
+        placeholder="Website-ul firmei"
+      />
+    </div>
+    <div>
+      <span className="material-form__label">Reprezentant Comercial</span>
+      <Field
+        name="reprezentantComercial"
+        component={renderTextField}
+        placeholder="Numele reprezentantului comercial"
+      />
+    </div>
+    <div>
+      <span className="material-form__label">Orar de functionare</span>
+      <Field
+        name="orarFunctionare"
+        component={renderTextField}
+        placeholder="Orar de functionare"
+      />
+    </div>
+    </Col>
+    <Col lg={6}>
+    <div>
+      <span  className="material-form__label">Zone de livrare</span>
+      <CategoryButtons style={{ marginTop: "10px !important"}} />
+    </div>
+    <div>
+      <span className="material-form__label">Nume firma</span>
+      <Field
+        name="numeFirma"
+        component={renderTextField}
+        placeholder="Numele firmei"
+      />
+    </div>
+    <div>
+      <span className="material-form__label">Sediu Social</span>
+      <Field
+        name="sediuSocial"
+        component={renderTextField}
+        placeholder="Adresa Sediului Social"
       />
     </div>
     <div>
       <span className="material-form__label">CUI</span>
       <Field
-        name="cui"
+        name="cuiFirma"
         component={renderTextField}
-        placeholder="example@mail.com"
-        type="cui"
+        placeholder="CUI Firma"
       />
     </div>
     <div>
-      <span className="material-form__label">Adresa</span>
+      <span className="material-form__label">ONRC</span>
       <Field
-        name="address"
+        name="onrcFirma"
         component={renderTextField}
-        placeholder="address"
+        placeholder="ONRC Firma"
       />
     </div>
     <div>
-      <span className="material-form__label">CUI</span>
+      <span className="material-form__label">Cont IBAN</span>
       <Field
-        name="email"
+        name="ibanFirma"
         component={renderTextField}
-        placeholder="example@mail.com"
-        type="email"
+        placeholder="IBAN Firma"
       />
     </div>
+    <div>
+      <span className="material-form__label">Platitor de TVA</span>
+      <FormGroup tag="fieldset">
+        <FormGroup check>
+          <Label check>
+            <Input type="radio" name="radio1" />{' '}
+            Da
+          </Label>
+        </FormGroup>
+        <FormGroup check>
+          <Label check>
+            <Input type="radio" name="radio1" />{' '}
+            Nu
+          </Label>
+        </FormGroup>
+        </FormGroup>
+      </div>
+
+    </Col>
+    </Row>
     {/* <div>
       <span className="material-form__label">Text Area</span>
       <Field
