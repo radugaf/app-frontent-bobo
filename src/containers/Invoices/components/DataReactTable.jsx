@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from "axios";
-// import { Button } from "reactstrap";
-import { Link } from "react-router-dom";
 import { Card, CardBody, Col } from "reactstrap";
 import ReactTableBase from "../../../shared/components/table/ReactTableBase";
 import {
@@ -33,6 +31,7 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData }) => {
   const [withSearchEngine, setWithSearchEngine] = useState(true);
 
   const call = async () => {
+
     let userType = await axios.get(
       `${BACKEND_URL}${requests.GET_CHECK_USER_TYPE}`,
       tokenConfig()
@@ -50,28 +49,11 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData }) => {
       SupplierInvoiceFetch();
     }
   };
+
   useEffect(() => {
     call();
   }, []);
 
-  const updateDraggableData = (result) => {
-    const items = reorder(rows, result.source.index, result.destination.index);
-    setData(items);
-  };
-  
-  const updateEditableData = (rowIndex, columnId, value) => {
-    setData((old) =>
-      old.map((item, index) => {
-        if (index === rowIndex) {
-          return {
-            ...old[rowIndex],
-            [columnId]: value,
-          };
-        }
-        return item;
-      })
-    );
-  };
 
   const tableConfig = {
     isEditable,
@@ -80,7 +62,7 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData }) => {
     withDragAndDrop,
     withPagination,
     withSearchEngine,
-    manualPageSize: [10, 20, 30, 40],
+    manualPageSize: [20, 20, 30, 40],
     placeholder: "Cauta Produs ...",
   };
 
@@ -103,12 +85,12 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData }) => {
     });
 
   return (
-    <Col md={12} lg={12}>
+    <Col md={12} lg={6}>
       <Card>
         <CardBody>
           <div className="react-table__wrapper">
             <div className="card__title">
-              <h3 className="bold-text">🧾 Facturi</h3>
+              <h3 className="bold-text">🧾 Achtia Facturi</h3>
             </div>
           </div>
 
@@ -120,8 +102,6 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData }) => {
             }
             columns={reactTableData.tableHeaderData}
             data={newInvoices}
-            updateEditableData={updateEditableData}
-            updateDraggableData={updateDraggableData}
             tableConfig={tableConfig}
           />
         </CardBody>

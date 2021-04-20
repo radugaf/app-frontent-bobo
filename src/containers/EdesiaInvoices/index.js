@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Card, CardBody, Button, } from "reactstrap";
 import DataReactTable from "./components/DataReactTable";
 import InvoiceTemplate from "./components/InvoiceTemplate";
 import CreateTableData from "./CreateData";
@@ -17,8 +17,36 @@ const DataTable = ({ invoices, SupplierInvoiceFetch }) => {
   }, []);
   console.log({ selectData, invoices });
 
+  const [showOne, setShowOne] = useState(true);
+  const [showTwo, setShowTwo] = useState(false);
+
   return (
     <Container>
+      <Row>
+        <Col>
+          <Card>
+            <CardBody>
+              <Button
+                onClick={() => setShowOne(!showOne)}
+                color="secondary"
+                size="sm"
+                outline="true"
+              >
+                Comenzi in asteptare
+              </Button>
+              <Button
+                onClick={() => setShowOne(!showOne)}
+                color="secondary"
+                size="sm"
+                outline="true"
+              >
+                Istoric comenzi
+              </Button>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+      {showOne ? (
       <Row>
         <Col lg={5}>
           {invoices &&
@@ -39,6 +67,15 @@ const DataTable = ({ invoices, SupplierInvoiceFetch }) => {
           )}
         </Col>
       </Row>
+            ) : (
+              <Row>
+              <Col lg={12}>
+                <div className="sticky-top sticky-top-custom">
+                  <DataReactTable reactTableData={reactTableData} />
+                </div>
+              </Col>
+            </Row>
+            )}
     </Container>
   );
 };

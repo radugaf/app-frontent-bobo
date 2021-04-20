@@ -28,22 +28,22 @@ const CreateTableData = () => {
         Header: "Restaurant",
         accessor: "restaurant",
       },
-      // {
-      //   Header: "Creation Date",
-      //   accessor: "invoice-date",
-      // },
-      // {
-      //   Header: "Value",
-      //   accessor: "value",
-      // },
-      // {
-      //   Header: "Sold",
-      //   accessor: "sold",
-      // },
-      // {
-      //   Header: "Status",
-      //   accessor: "status",
-      // },
+      {
+        Header: "Creation Date",
+        accessor: "invoice-date",
+      },
+      {
+        Header: "Value",
+        accessor: "value",
+      },
+      {
+        Header: "Sold",
+        accessor: "sold",
+      },
+      {
+        Header: "Status",
+        accessor: "status",
+      },
       // {
       //   Header: "Produsele au fost livrate",
       //   accessor: "is_shipped_document",

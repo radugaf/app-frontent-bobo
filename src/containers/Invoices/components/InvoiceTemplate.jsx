@@ -23,6 +23,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import { URL } from "../../../requests";
 import { FormGroup } from "@material-ui/core";
 
 const invoiceData = [
@@ -45,7 +46,7 @@ const ToastSuccess = () => (
   </Fragment>
 );
 
-const InvoiceTemplate = () => {
+const InvoiceTemplate = ({ invoice }) => {
   const [copied, setCopied] = useState(false);
 
   const onCopy = () => {
@@ -216,8 +217,7 @@ const InvoiceTemplate = () => {
         </CardBody>
       </Card>
     </Col>
-  );
-};
+)};
 
 InvoiceTemplate.propTypes = {
   handleSubmit: PropTypes.func.isRequired,

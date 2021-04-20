@@ -1,5 +1,16 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { toast } from "react-toastify";
+import BasicCarouselWithCaption from "./BasicCarouselWithCaption";
+import { Field, reduxForm } from "redux-form";
+import renderFileInputField from "../../../shared/components/form/FileInput";
+import PropTypes from "prop-types";
 import {
+  Form,
+  InputGroup,
+  InputGroupAddon,
+  Input,
+  InputGroupText,
   Row,
   Card,
   Col,
@@ -12,6 +23,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import { URL } from "../../../requests";
+import { FormGroup } from "@material-ui/core";
 
 const invoiceData = [
   { title: "Wordpress Plugin Apollo 200", quantity: 1, cost: 27 },
@@ -19,10 +32,37 @@ const invoiceData = [
   { title: "Spirit HTML Template", quantity: 2, cost: 20 },
 ];
 
-const InvoiceTemplate = () => {
+const invoiceNumber = "#EM000001";
+const invoiceAddress =
+  "Aspirity Creative Web Studio 44 Shirley Ave. West Chicago, IL +8 (224) 243-4543";
+
+const ToastSuccess = () => (
+  <Fragment>
+    <div className="toastify-header pb-0">
+      <div className="title-wrapper">
+        <h6 className="toast-title">Copiat!</h6>
+      </div>
+    </div>
+  </Fragment>
+);
+
+const InvoiceTemplate = ({ invoice }) => {
+  const [copied, setCopied] = useState(false);
+
+  const onCopy = () => {
+    setCopied(true);
+    toast.success(<ToastSuccess />, {
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeButton: false,
+    });
+  };
+
   const [modal, setModal] = useState(false);
+  const [modal2, setModal2] = useState(false);
 
   const toggle = () => setModal(!modal);
+  const toggle2 = () => setModal2(!modal2);
 
   return (
     <Col lg={12}>
@@ -31,14 +71,28 @@ const InvoiceTemplate = () => {
           <div className="invoice__head">
             <div className="invoice__head-left">
               <div className="invoice__logo" />
-              <p>Aspirity Creative Web Studio </p>
-              <p>44 Shirley Ave.</p>
-              <p>West Chicago,</p>
-              <p>IL 60185 </p>
-              <p dir="ltr">+8 (224) 243-4543</p>
+              <address className="invoice-custom-address">
+                {invoiceAddress}
+                <CopyToClipboard
+                  className="invoice-address-custom-button"
+                  onCopy={onCopy}
+                  text={invoiceAddress}
+                >
+                  <button>Copy!</button>
+                </CopyToClipboard>
+              </address>
             </div>
-            <div className="invoice__head-right">
-              <h4>Invoice #EM000001</h4>
+            <div className="invoice__head-right invoice__head-right-custom">
+              <h4 className="custom-h4">
+                Invoice {invoiceNumber}
+                <CopyToClipboard
+                  className="invoice-button-custom"
+                  onCopy={onCopy}
+                  text={invoiceNumber}
+                >
+                  <button>Copy!</button>
+                </CopyToClipboard>
+              </h4>
               <p className="invoice__date">Februarie 23, 2020</p>
               <p>Maria Morris</p>
               <p>Project Manager at BLX</p>
@@ -69,52 +123,92 @@ const InvoiceTemplate = () => {
               ))}
             </tbody>
           </Table>
+
+          
           <div className="invoice__total">
             <p>Sub - Total amount: 126.00 RON</p>
             <p>VAT: 20.00 RON</p>
             <p className="invoice__grand-total">Grand Total: 146.00 RON</p>
             <ButtonToolbar className="invoice__toolbar">
-              <Button>Print</Button>
-              <Button onClick={toggle} className="btn btn-success">
+              <Button
+                className="margin-left-custom btn-custom2"
+                color="danger"
+                onClick={toggle2}
+              >
+                Report
+              </Button>
+              <Modal
+                style={{ maxWidth: "1000px" }}
+                isOpen={modal2}
+                toggle={toggle2}
+              >
+                <ModalHeader toggle={toggle2}>Raporteaza :</ModalHeader>
+                <ModalBody>
+                  <FormGroup style={{ height: "400px" }}>
+                    <Input
+                      style={{ height: "100%" }}
+                      type="textarea"
+                      name="text"
+                      id="exampleText"
+                      placeholder="Subiect"
+                    />
+                  </FormGroup>
+                </ModalBody>
+                <ModalFooter>
+                  {" "}
+                  <Button color="success" onClick={toggle2}>
+                    Trimite
+                  </Button>
+                  <Button color="secondary" onClick={toggle2}>
+                    Anuleaza
+                  </Button>
+                </ModalFooter>
+              </Modal>
+              <Button className="btn-custom2">Print</Button>
+              <Button onClick={toggle} className="btn btn-success btn-custom2">
                 Mark as Paid
               </Button>
               <Modal
-                lg="5"
-                size="lg"
-                style={{ maxWidth: "1000px", width: "100%" }}
+                style={{ maxWidth: "1000px" }}
                 isOpen={modal}
                 toggle={toggle}
               >
                 <ModalHeader toggle={toggle}>Modal title</ModalHeader>
                 <ModalBody>
-                  <Row>
-                    <Col md={12} lg={6}>
-                      <Table>
-                        <thead>
-                          <tr>
-                            <th>Numar Factura</th>
-                            <th>First Name</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                          </tr>
-                        </tbody>
-                      </Table>
+                  <BasicCarouselWithCaption />
+                </ModalBody>
+                <ModalFooter style={{ maxWidth: "1000px" }}>
+                  <Row className="input-custom-row">
+                    <Col lg="6" md="6">
+                      <Form style={{ width: "100%" }}>
+                        <FormGroup>
+                          <InputGroup>
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>Plateste partial</InputGroupText>
+                            </InputGroupAddon>
+                            <Input value="125 Ron" />
+                          </InputGroup>
+                        </FormGroup>
+                      </Form>
                     </Col>
-                    <Col md={12} lg={6}>
-                      Test
+                    <Col lg="6" md="6">
+                      <div className="form__form-group">
+                        <span className="form__form-group-label">
+                          Adauga Dovada
+                        </span>
+                        <div className="form__form-group-field">
+                          <Field name="file" component={renderFileInputField} />
+                        </div>
+                      </div>
                     </Col>
                   </Row>
-                </ModalBody>
+                </ModalFooter>
                 <ModalFooter>
-                  <Button color="primary" onClick={toggle}>
-                    Do Something
-                  </Button>{" "}
+                  <Button onClick={toggle} className="btn btn-success">
+                    Mark as Paid
+                  </Button>
                   <Button color="secondary" onClick={toggle}>
-                    Cancel
+                    Anuleaza
                   </Button>
                 </ModalFooter>
               </Modal>
@@ -123,7 +217,13 @@ const InvoiceTemplate = () => {
         </CardBody>
       </Card>
     </Col>
-  );
+)};
+
+InvoiceTemplate.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
 };
 
-export default InvoiceTemplate;
+export default reduxForm({
+  form: "horizontal_form", // a unique identifier for this form
+})(InvoiceTemplate);
