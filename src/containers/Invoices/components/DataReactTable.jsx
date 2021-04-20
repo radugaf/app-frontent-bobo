@@ -1,3 +1,4 @@
+import InformationOutlineIcon from 'mdi-react/InformationOutlineIcon'
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -95,7 +96,7 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => 
         <CardBody>
           <div className="react-table__wrapper">
             <div className="card__title">
-              <h3 className="bold-text" data-tip='Aici vin informatiile pe care le vrei tu'>🧾 Achtia Facturi</h3>
+            <h3 className="bold-text" data-tip='Aici vin informatiile pe care le vrei tu'>🧾 Achtia Facturi<InformationOutlineIcon style={{marginBottom: "4px", marginLeft: "15px"}} /></h3>
               <ReactTooltip place='right' className='extraClass' delayHide={1000} effect='solid'  type='info'/>
             </div>
           </div>
