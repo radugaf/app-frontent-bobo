@@ -6,6 +6,7 @@ import KeyVariantIcon from "mdi-react/KeyVariantIcon";
 import AccountOutlineIcon from "mdi-react/AccountOutlineIcon";
 import { connect } from "react-redux";
 import { SetToken } from "../../redux/actions/products";
+import Logo from "../../scss/images/logo.PNG"
 
 const Login = ({ SetToken }) => {
   const [formDataUserName, setFormDataUserName] = useState();
@@ -30,7 +31,8 @@ const Login = ({ SetToken }) => {
     <div className="account">
       <div className="account__wrapper">
         <div className="account__card">
-          <div className="account__head">
+          <div className="account__head custom_account_head">
+            <div>
             <h3 className="account__title">
               Welcome to 
               <span className="account__logo">
@@ -41,6 +43,8 @@ const Login = ({ SetToken }) => {
             <h4 className="account__subhead subhead">
               Prietenul tau cel mai bun din HoReCa!
             </h4>
+            </div>
+            <div className='custom-account-head-img'><img src={Logo} alt='edesia-logo' /></div>
           </div>
 
           {/* Here goes the form */}
