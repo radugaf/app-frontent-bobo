@@ -41,6 +41,7 @@ img {
 
 .sticky-top-custom {
   top: 90px;
+  z-index: 1;
 }
 
 .custom-h4, .custom-td {
@@ -79,6 +80,24 @@ img {
   width: 100% !important;
   display: flex;
   flex-direction: row;
+}
+
+.custom-dropdown-component {
+  padding: 10px;
+}
+
+.custom-ontop {
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+.custom-collapse-form {
+  margin-top: 10px !important;
+}
+
+.custom-collapse-button {
+  margin-top: 10px;
+  width: 100%;
 }
 
 @media (max-width: 768px) {

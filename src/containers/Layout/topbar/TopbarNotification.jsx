@@ -59,22 +59,17 @@ const TopbarNotification = ({ handleSubmit }) => {
           onClick={toggleNotification}
         />
       )}
-      <Collapse isOpen={isCollapsed} className="topbar__collapse-content">
-        <div className="topbar__collapse-title-wrap">
+      <Collapse isOpen={isCollapsed} className="topbar__collapse-content .custom-ontop">
+        <div className='custom-dropdown-component custom .custom-ontop'>
           <p className="topbar__collapse-title">Cum te putem ajuta?</p>
-        </div>
-
-        <form className="form form--horizontal" onSubmit={handleSubmit}>
-          <div className="form__form-group">
+          <form className="form form--horizontal custom-collapse-form" onSubmit={handleSubmit}>
             <Field name="textarea" component="textarea" type="text" placeholder="Ce prob ai patron?" />
-          </div>
-          <ButtonToolbar className="form__button-toolbar">
-            <Button color="primary" type="submit">
+            <Button color="primary" type="submit" className='custom-collapse-button'>
               Submit
             </Button>
-          </ButtonToolbar>
         </form>
-   
+        </div>
+        
       </Collapse>
     </div>
   );
