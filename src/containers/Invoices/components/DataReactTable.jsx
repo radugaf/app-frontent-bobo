@@ -1,4 +1,3 @@
-import InformationOutlineIcon from 'mdi-react/InformationOutlineIcon'
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -6,38 +5,31 @@ import axios from "axios";
 import { Card, CardBody, Col } from "reactstrap";
 import ReactTableBase from "../../../shared/components/table/ReactTableBase";
 import {
-  SupplierInvoiceFetch,
+  ProductFetch,
+  AddToCart,
   SetToken,
+  SupplierProductFetch,
   tokenConfig,
 } from "../../../redux/actions/products";
-import ReactTooltip from 'react-tooltip';
+import { toastr } from "react-redux-toastr";
 
 import requests, { URL, BACKEND_URL } from "../../../requests";
 
-const reorder = (rows, startIndex, endIndex) => {
-  const result = Array.from(rows);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
+const DataReactTable = ({
+  ProductFetch,
+  AddToCart,
+  products,
+  SupplierProductFetch,
+  reactTableData,
+}) => {
+  console.log({ rows: reactTableData.tableRowsData, products });
 
-  return result;
-};
-
-const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => {
-
-
-
-  console.log({ rows: reactTableData.tableRowsData, invoices });
-  const [rows, setData] = useState([]);
-  const [isEditable, setIsEditable] = useState(false);
   const [isResizable, setIsResizable] = useState(true);
   const [isSortable, setIsSortable] = useState(true);
-  const [withDragAndDrop, setWithDragAndDrop] = useState(false);
   const [withPagination, setWithPaginationTable] = useState(true);
   const [withSearchEngine, setWithSearchEngine] = useState(true);
 
-
   const call = async () => {
-
     let userType = await axios.get(
       `${BACKEND_URL}${requests.GET_CHECK_USER_TYPE}`,
       tokenConfig()
@@ -46,13 +38,13 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => 
       is_restaurant_owner: true,
     };
     if (userType && (userType.is_company_owner || userType.is_company_staff)) {
-      SupplierInvoiceFetch();
+      SupplierProductFetch();
     }
     if (
       userType &&
       (userType.is_restaurant_staff || userType.is_restaurant_owner)
     ) {
-      SupplierInvoiceFetch();
+      ProductFetch();
     }
   };
 
@@ -60,34 +52,50 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => 
     call();
   }, []);
 
+  const onSubmit = (e, product_id) => {
+    e.preventDefault();
+    AddToCart({ product_id: product_id });
+    // toastr.success(`Add To ${type}`, `Add To ${type} successfully added `);
+  };
 
   const tableConfig = {
-    isEditable,
     isResizable,
     isSortable,
-    withDragAndDrop,
     withPagination,
     withSearchEngine,
     manualPageSize: [20, 20, 30, 40],
     placeholder: "Cauta Produs ...",
   };
 
-  const newInvoices =
-    invoices &&
-    invoices.map((invoice) => {
-      console.log({ invoice });
+  const newProducts =
+    products &&
+    products.map((product) => {
+      let className = "";
+      let buttonName = "Cart";
+      if (product.instant_delivery) {
+        className = "btn btn-success btn-sm w-100";
+        buttonName = "Cart";
+      } else {
+        className = "btn btn-primary btn-sm w-100";
+        buttonName = "Wishlist";
+      }
 
-      invoice["documents_link"] = (
-        <button
-          className="btn btn-primary btn-sm"
-          onClick={() =>
-            window.open(`${URL}${invoice.document_link}`, "_blank")
-          }
+      product["button"] = (
+        <div
+          class={className}
+          onClick={(e) => {
+            onSubmit(e, product.id, buttonName);
+          }}
         >
-          Print
-        </button>
+          Adauga in {buttonName}
+        </div>
       );
-      return invoice;
+
+      product["product_image"] = (
+        <img src={`${URL}${product.image_main}`}></img>
+      );
+
+      return product;
     });
 
   return (
@@ -96,18 +104,13 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => 
         <CardBody>
           <div className="react-table__wrapper">
             <div className="card__title">
-            <h3 className="bold-text" data-tip='Aici vin informatiile pe care le vrei tu'>🧾 Achtia Facturi<InformationOutlineIcon style={{marginBottom: "4px", marginLeft: "15px"}} /></h3>
-              <ReactTooltip place='right' className='extraClass' delayHide={1000} effect='solid'  type='info'/>
+              <h3 className="bold-text">🍲 Catalog Produse</h3>
             </div>
           </div>
           <ReactTableBase
-            key={
-              withSearchEngine || isResizable || isEditable
-                ? "modified"
-                : "common"
-            }
+            key={withSearchEngine || isResizable ? "modified" : "common"}
             columns={reactTableData.tableHeaderData}
-            data={newInvoices}
+            data={newProducts}
             tableConfig={tableConfig}
           />
         </CardBody>
@@ -132,11 +135,15 @@ DataReactTable.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    invoices: state.products.invoiceDetails,
+    products: state.products.productsDetails,
     authErrors: state.products.error,
     user: state.products.user,
   };
 };
 
-
-export default connect( mapStateToProps, { SupplierInvoiceFetch, SetToken}) (DataReactTable);
+export default connect(mapStateToProps, {
+  ProductFetch,
+  AddToCart,
+  SetToken,
+  SupplierProductFetch,
+})(DataReactTable);

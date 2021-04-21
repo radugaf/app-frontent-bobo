@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Container, Row, Col, Card, CardBody, Button, } from "reactstrap";
 import DataReactTable from "./components/DataReactTable";
 import InvoiceTemplate from "./components/InvoiceTemplate";
-import CreateTableData from "./CreateData";
+import CreateTableData from "./components/CreateData";
 import MatTable from "./components/MatTable";
 import { SupplierInvoiceFetch } from "../../redux/actions/products";
 
@@ -19,7 +19,7 @@ const DataTable = ({ invoices, SupplierInvoiceFetch }) => {
 
   const [showOne, setShowOne] = useState(true);
   const [showTwo, setShowTwo] = useState(false);
-
+  
   return (
     <Container>
       <Row>
