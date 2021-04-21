@@ -29,12 +29,12 @@ class SidebarContent extends Component {
             route="/pages/dashboard"
             onClick={this.hideSidebar}
           />
-          <SidebarLink
+          {/* <SidebarLink
             icon="pie-chart"
             title="Order Details"
             route="/pages/order-details"
             onClick={this.hideSidebar}
-          />
+          /> */}
         </ul>
 
         <ul className="sidebar__block">

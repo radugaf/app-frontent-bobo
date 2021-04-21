@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import MatTable from "./components/MatTable";
 import RecentOrders from "./components/RecentOrders";
 import OrdersListTable from './components/OrdersListTable'
-import CreateTableData from './components/CreateData';
+import CreateDataOrderListTable from './components/CreateData';
 import {
   GetAddToCart,
   DeleteCart,
@@ -20,37 +20,37 @@ const MaterialTable = ({ GetAddToCart, carts }) => {
     GetAddToCart();
   }, []);
 
-  const header = [
-    {
-      accessor: 'product_item_id',
-      Header: 'id',
-      width: 65,
-    },
-    {
-      accessor: 'product_title',
-      Header: 'Nume Produs',
-      disableGlobalFilter: true,
-    },
-    {
-      accessor: 'quantity_by_restaurant',
-      Header: 'Cantitate Dorita',
-    },
-    {
-      accessor: 'custom_status',
-      Header: 'Status',
+  // const header = [
+  //   {
+  //     accessor: 'product_item_id',
+  //     Header: 'id',
+  //     width: 65,
+  //   },
+  //   {
+  //     accessor: 'product_title',
+  //     Header: 'Nume Produs',
+  //     disableGlobalFilter: true,
+  //   },
+  //   {
+  //     accessor: 'quantity_by_restaurant',
+  //     Header: 'Cantitate Dorita',
+  //   },
+  //   {
+  //     accessor: 'custom_status',
+  //     Header: 'Status',
     
-    },
-  ];
+  //   },
+  // ];
   
-  const orderListTableData = CreateTableData({newColumns:header});
-  console.log({carts})
+  // const orderListTableData = CreateTableData({newColumns:header});
+  // console.log({carts})
+  const reactTableData = CreateDataOrderListTable();
+
   return (
     <Container>
       <Row>
         <MatTable carts={carts} />
-        {/* <SalesReport carts={carts} /> */}
-        {/* <RecentOrders carts={carts} /> */}
-        <OrdersListTable orderListTableData={orderListTableData} carts={carts}/>
+        <OrdersListTable orderListTableData={reactTableData} carts={carts}/>
       </Row>
     </Container>
   );

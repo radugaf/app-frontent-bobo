@@ -1,3 +1,5 @@
+import InformationOutlineIcon from "mdi-react/InformationOutlineIcon";
+import ReactTooltip from "react-tooltip";
 import React, { useState, useEffect } from "react";
 import { Card, CardBody, Col } from "reactstrap";
 import { connect } from "react-redux";
@@ -48,7 +50,6 @@ const getSorting = (order, orderBy) => {
 };
 
 const MatTable = ({ carts, GetAddToCart, UpdateCart }) => {
-  
   const data1 = (carts && carts.instant_delivery_items) || [];
   const data2 =
     carts &&
@@ -147,9 +148,9 @@ const MatTable = ({ carts, GetAddToCart, UpdateCart }) => {
   };
 
   const total = data.reduce(totalCal, 0);
-  const total2 = parseFloat(total).toFixed(2)
-  const totalVAT = total +  total * 0.09
-  const totalVAT2 = parseFloat(totalVAT).toFixed(2)
+  const total2 = parseFloat(total).toFixed(2);
+  const totalVAT = total + total * 0.09;
+  const totalVAT2 = parseFloat(totalVAT).toFixed(2);
 
   const data3 = [
     {
@@ -180,8 +181,25 @@ const MatTable = ({ carts, GetAddToCart, UpdateCart }) => {
       <Col md={12} lg={8}>
         <Card>
           <CardBody>
-            <div className="card__title">
-              <h3 className="bold-text">🛒 Cosul de cumparaturi</h3>
+            <div className="react-table__wrapper">
+              <div className="card__title">
+                <h3
+                  className="bold-text"
+                  data-tip="Aici vin informatiile pe care le vrei tu"
+                >
+                  🛒 Cosul de cumparaturi
+                  <InformationOutlineIcon
+                    style={{ marginBottom: "4px", marginLeft: "15px" }}
+                  />
+                </h3>
+                <ReactTooltip
+                  place="right"
+                  className="extraClass"
+                  delayHide={1000}
+                  effect="solid"
+                  type="info"
+                />
+              </div>
             </div>
             <MatTableToolbar
               selectedData={[...selected]
@@ -276,7 +294,8 @@ const MatTable = ({ carts, GetAddToCart, UpdateCart }) => {
                               />
                             </TableCell>
                             <TableCell className="material-table__cell material-table__cell-right">
-                              {d.total} RON
+                              {parseFloat(d.total).toFixed(2)}{" "}
+                              RON
                             </TableCell>
                             <TableCell className="material-table__cell material-table__cell-right">
                               {/* {d.remaining_time} */}

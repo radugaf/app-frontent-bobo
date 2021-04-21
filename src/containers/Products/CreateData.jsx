@@ -15,7 +15,6 @@ const CreateTableData = () => {
         disableGlobalFilter: true,
         disableSortBy: true,
         width: 65,
-
       },
       {
         Header: "Produs",

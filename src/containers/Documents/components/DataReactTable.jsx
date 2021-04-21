@@ -1,4 +1,4 @@
-import InformationOutlineIcon from 'mdi-react/InformationOutlineIcon'
+import InformationOutlineIcon from "mdi-react/InformationOutlineIcon";
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -10,7 +10,7 @@ import {
   SetToken,
   tokenConfig,
 } from "../../../redux/actions/products";
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from "react-tooltip";
 
 import requests, { URL, BACKEND_URL } from "../../../requests";
 
@@ -22,10 +22,7 @@ const reorder = (rows, startIndex, endIndex) => {
   return result;
 };
 
-const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => {
-
-
-
+const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData }) => {
   console.log({ rows: reactTableData.tableRowsData, invoices });
   const [rows, setData] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
@@ -35,9 +32,7 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => 
   const [withPagination, setWithPaginationTable] = useState(true);
   const [withSearchEngine, setWithSearchEngine] = useState(true);
 
-
   const call = async () => {
-
     let userType = await axios.get(
       `${BACKEND_URL}${requests.GET_CHECK_USER_TYPE}`,
       tokenConfig()
@@ -59,7 +54,6 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => 
   useEffect(() => {
     call();
   }, []);
-
 
   const tableConfig = {
     isEditable,
@@ -96,8 +90,22 @@ const DataReactTable = ({ SupplierInvoiceFetch, invoices, reactTableData  }) => 
         <CardBody>
           <div className="react-table__wrapper">
             <div className="card__title">
-            <h3 className="bold-text" data-tip='Aici vin informatiile pe care le vrei tu'>🧾 Achtia Facturi<InformationOutlineIcon style={{marginBottom: "4px", marginLeft: "15px"}} /></h3>
-              <ReactTooltip place='right' className='extraClass' delayHide={1000} effect='solid'  type='info'/>
+              <h3
+                className="bold-text"
+                data-tip="Aici vin informatiile pe care le vrei tu"
+              >
+                🧾 Achtia Facturi
+                <InformationOutlineIcon
+                  style={{ marginBottom: "4px", marginLeft: "15px" }}
+                />
+              </h3>
+              <ReactTooltip
+                place="right"
+                className="extraClass"
+                delayHide={1000}
+                effect="solid"
+                type="info"
+              />
             </div>
           </div>
           <ReactTableBase
@@ -138,5 +146,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-
-export default connect( mapStateToProps, { SupplierInvoiceFetch, SetToken}) (DataReactTable);
+export default connect(mapStateToProps, { SupplierInvoiceFetch, SetToken })(
+  DataReactTable
+);

@@ -22,7 +22,7 @@ const DataReactTable = ({
   SupplierProductFetch,
   reactTableData,
 }) => {
-  console.log({ rows: reactTableData.tableRowsData, products });
+
 
   const [isResizable, setIsResizable] = useState(true);
   const [isSortable, setIsSortable] = useState(true);

@@ -1,3 +1,4 @@
+import InformationOutlineIcon from "mdi-react/InformationOutlineIcon";
 import React, { useState, useEffect } from "react";
 import { Card, CardBody, Col } from "reactstrap";
 import { connect } from "react-redux";
@@ -12,6 +13,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import MatTableHead from "./MatTableHead";
 import MatTableToolbar from "./MatTableToolbar";
 import { SupplierInvoiceFetch } from "../../../redux/actions/products";
+import ReactTooltip from "react-tooltip";
 
 const getSorting = (order, orderBy) => {
   if (order === "desc") {
@@ -62,16 +64,16 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
       const newSelected = new Map();
       data.map((n) => newSelected.set(n.id, true));
       setSelected(newSelected);
-      setSelectedData(newSelected)
+      setSelectedData(newSelected);
       return;
     }
     setSelected(new Map([]));
-    setSelectedData(new Map([]))
+    setSelectedData(new Map([]));
   };
 
   // HandleSingle chekcbox click
-  const handleClick = (e,id) => {
-    console.log({id})
+  const handleClick = (e, id) => {
+    console.log({ id });
     const newSelected = new Map(selected);
     const value = newSelected.get(id);
     let isActive = true;
@@ -80,10 +82,10 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
     }
     newSelected.set(id, isActive);
     setSelected(newSelected);
-    setSelectedData(newSelected)
+    setSelectedData(newSelected);
   };
 
-  const handleChangePage = (item,page) => {
+  const handleChangePage = (item, page) => {
     setPage(page);
   };
 
@@ -91,7 +93,7 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
     setRowsPerPage(Number(event.target.value));
   };
 
-  const isSelected = (id) => !!selected.get(id)
+  const isSelected = (id) => !!selected.get(id);
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
@@ -100,16 +102,26 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
     <Col lg={12}>
       <Card>
         <CardBody>
-          <div className="card__title">
-            <h3 className="bold-text">🧾 FACTURI PROFORME</h3>
+          <div className="react-table__wrapper">
+            <div className="card__title">
+              <h3
+                className="bold-text"
+                data-tip="Aici vin informatiile pe care le vrei tu"
+              >
+                🧾 FACTURI PROFORME
+                <InformationOutlineIcon
+                  style={{ marginBottom: "4px", marginLeft: "15px" }}
+                />
+              </h3>
+              <ReactTooltip
+                place="right"
+                className="extraClass"
+                delayHide={1000}
+                effect="solid"
+                type="info"
+              />
+            </div>
           </div>
-          {/* <MatTableToolbar
-              selectedData={[...selected]
-                .filter((el) => el[1])
-                .map((el) => el[0])}
-              numSelected={[...selected].filter((el) => el[1]).length}
-              onRequestSort={handleRequestSort}
-            /> */}
           <div className="material-table__wrap">
             <Table className="material-table">
               <MatTableHead
@@ -126,8 +138,8 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((d) => {
                     const select = isSelected(d.id);
-                    console.log({id:d.id})
-                    console.log({select})
+                    console.log({ id: d.id });
+                    console.log({ select });
                     return (
                       <TableRow
                         className="material-table__row"
@@ -153,7 +165,7 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
                           scope="row"
                           padding="none"
                         >
-                          {d.invoice_number}
+                          {d.restaurant}
                         </TableCell>
                         <TableCell
                           className="material-table__cell material-table__cell-right"
@@ -164,7 +176,10 @@ const MatTable = ({ data, SupplierInvoiceFetch, setSelectedData }) => {
                           {d.product_title}
                         </TableCell>
                         <TableCell className="material-table__cell material-table__cell-right">
-                          {d.final_price} RON
+                          {d.final_price}
+                        </TableCell>
+                        <TableCell className="material-table__cell material-table__cell-right">
+                          {d.final_price} 
                         </TableCell>
                       </TableRow>
                     );

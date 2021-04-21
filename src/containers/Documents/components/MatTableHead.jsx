@@ -10,14 +10,19 @@ import { RTLProps } from "../../../shared/prop-types/ReducerProps";
 
 const rows = [
   {
-    id: "edesia",
+    id: "restaurant",
     disablePadding: true,
-    label: "Edesia",
+    label: "Restaurant",
   },
   {
-    id: "suma",
+    id: "total",
     disablePadding: true,
-    label: "Suma",
+    label: "Total",
+  },
+  {
+    id: "currency",
+    disablePadding: true,
+    label: "Currency",
   },
   {
     id: "Status",
