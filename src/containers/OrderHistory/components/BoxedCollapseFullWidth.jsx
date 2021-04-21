@@ -2,15 +2,19 @@ import { Button, Container, Row, Card, CardBody, Col } from "reactstrap";
 import Collapse from "../../../shared/components/Collapse";
 import MinimalCollapse from "./MinimalCollapse";
 import MatTableImport from "./Mattableimport";
+import DataReactTable from "./DataReactTable";
+import CreateTableData from "./CreateData";
 
 // Edesia
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { GetRestaurantOrder } from "../../../redux/actions/products";
 
-const BoxedCollapseFullWidth = ({ GetRestaurantOrder, orders, keys, data }) => {
+const BoxedCollapseFullWidth = ({ GetRestaurantOrder, orders }) => {
   const [showOne, setShowOne] = useState(true);
   const [showTwo, setShowTwo] = useState(false);
+
+  const reactTableData = CreateTableData();
 
 
 
@@ -84,10 +88,7 @@ const BoxedCollapseFullWidth = ({ GetRestaurantOrder, orders, keys, data }) => {
               <div className="card__title">
                 <h3 className="bold-text">📦 Receptie Marfa 2</h3>
               </div>
-              {Object.keys(orders) &&
-                Object.keys(orders).map((key) => (
-                  <MatTableImport keys={key} data={orders} />
-                ))}
+              <DataReactTable reactTableData={reactTableData} />
             </CardBody>
           </Card>
         </Col>
