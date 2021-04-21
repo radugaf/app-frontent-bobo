@@ -6,14 +6,14 @@ import MatTableImport from "./Mattableimport";
 // Edesia
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { GetRestaurantOrder } from "../../../redux/actions/products";
+import { GetSupplierOrder } from "../../../redux/actions/products";
 
-const BoxedCollapseFullWidth = ({ GetRestaurantOrder, orders }) => {
+const BoxedCollapseFullWidth = ({ GetSupplierOrder, orders }) => {
   const [showOne, setShowOne] = useState(true);
   const [showTwo, setShowTwo] = useState(false);
 
   useEffect(() => {
-    GetRestaurantOrder();
+    GetSupplierOrder();
   }, []);
 
   return (
@@ -103,5 +103,5 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, {
-  GetRestaurantOrder,
+  GetSupplierOrder,
 })(BoxedCollapseFullWidth);

@@ -1,5 +1,5 @@
-// export const URL = "http://localhost:8000";
-export const URL = "https://edesia-development.com";
+export const URL = "http://localhost:8000";
+// export const URL = "https://edesia-development.com";
 export const BACKEND_URL = `${URL}/api/v1/`;
 
 export default {
@@ -26,10 +26,10 @@ export default {
 
   MARK_AS_DELIVERY_SUPPLIER_ORDER: "mark-orders-as-delivered/",
   GET_SUPPLIER_ORDERS: "supplier-pending-product-list/",
-  RESURANT_SHIPPED_PEODUCT_LIST:"restaurant-shipped-product-list/",
-  
+  RESURANT_SHIPPED_PEODUCT_LIST: "restaurant-shipped-product-list/",
+
   // Invoices
-  SUPPLIER_INVOICES: "invoice-list/"
+  SUPPLIER_INVOICES: "invoice-list/",
 };
 
 export const TOKEN =

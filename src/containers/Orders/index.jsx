@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Col, Container, Row } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import BoxedCollapseFullWidth from './components/BoxedCollapseFullWidth';
 
 const Collapse = () => {
