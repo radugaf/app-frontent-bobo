@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Card, CardBody, Col } from "reactstrap";
 import ReactTableBase from "../../../shared/components/table/ReactTableBase";
+import classNames from 'classnames';
 import {
   ProductFetch,
   AddToCart,
@@ -52,10 +53,73 @@ const DataReactTable = ({
     call();
   }, []);
 
+  
+
   const onSubmit = (e, product_id) => {
     e.preventDefault();
     AddToCart({ product_id: product_id });
     // toastr.success(`Add To ${type}`, `Add To ${type} successfully added `);
+  };
+
+  const NewOrderAmount = ({ quantity }) => {
+    const amountClass = classNames({
+      'dashboard__table-orders-amount': true,
+      'dashboard__table-orders-amount--medium': quantity <= 100,
+      'dashboard__table-orders-amount--low': quantity <= 20,
+    });
+    if (quantity > 150) {
+      return (
+        <div className={amountClass}>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#4ce1b6"}}/>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#4ce1b6"}}/>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#4ce1b6"}}/>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#4ce1b6"}}/>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#4ce1b6"}}/>
+          <span hidden>{quantity}</span>
+        </div>
+      );
+    } if (quantity > 100) {
+      return (
+        <div className={amountClass}>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#4ce1b6"}}/>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#4ce1b6"}}/>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#4ce1b6"}}/>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#4ce1b6"}}/>
+          <span hidden>{quantity}</span>
+        </div>
+      );
+    } if (quantity > 50) {
+      return (
+        <div className={amountClass}>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#f6da6e"}}/>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#f6da6e"}}/>
+          <div style={{width: "3px", height: "10px", backgroundColor: "#f6da6e"}}/>
+          <span hidden>{quantity}</span>
+        </div>
+      );
+    } if (quantity > 20) {
+      return (
+        <div className={amountClass}>
+          <div style={{width: "3px", height: "100%", backgroundColor: "#f6da6e"}}/>
+          <div style={{width: "3px", height: "100%", backgroundColor: "#f6da6e"}}/>
+          <span hidden>{quantity}</span>
+        </div>
+      );
+    }
+    return (
+      <div className={amountClass}>
+        <div style={{width: "3px", height: "10px", backgroundColor: "#ff4861"}}/>
+        <span>{quantity}</span>
+      </div>
+    );
+  };
+  
+  NewOrderAmount.propTypes = {
+    quantity: PropTypes.number,
+  };
+  
+  NewOrderAmount.defaultProps = {
+    quantity: 0,
   };
 
   const tableConfig = {
@@ -94,6 +158,14 @@ const DataReactTable = ({
       product["product_image"] = (
         <img src={`${URL}${product.image_main}`}></img>
       );
+
+      product["supplier_company.name"] = (
+        <>
+        <NewOrderAmount quantity={product.name_rating} />
+        <span>{product.name}</span>
+        </>
+      );
+
 
       return product;
     });

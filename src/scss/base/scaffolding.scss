@@ -111,6 +111,12 @@ img {
   margin-left: 20px;
 }
 
+.dashboard__table-orders-amount {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .btn-custom2 {
       width:100% !important;
