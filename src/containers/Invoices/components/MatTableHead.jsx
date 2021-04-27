@@ -15,14 +15,24 @@ const rows = [
     label: "Edesia",
   },
   {
-    id: "suma",
+    id: "furnizor",
     disablePadding: true,
-    label: "Suma",
+    label: "Furnizor",
   },
   {
-    id: "Status",
+    id: "adresalivrare",
     disablePadding: false,
-    label: "Status",
+    label: "Adresa Livrare",
+  },
+  {
+    id: "serienumar",
+    disablePadding: false,
+    label: "Seria / Numar",
+  },
+  {
+    id: "suma",
+    disablePadding: false,
+    label: "Total",
   },
 ];
 

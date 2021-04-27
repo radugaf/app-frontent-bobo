@@ -32,7 +32,7 @@ const DataTable = ({ invoices, SupplierInvoiceFetch }) => {
                 size="sm"
                 outline="true"
               >
-                Comenzi in asteptare
+                De achitat
               </Button>
               <Button
                 onClick={() => setShowOne(!showOne)}
@@ -40,7 +40,7 @@ const DataTable = ({ invoices, SupplierInvoiceFetch }) => {
                 size="sm"
                 outline="true"
               >
-                Istoric comenzi
+                Istoric facturi
               </Button>
             </CardBody>
           </Card>

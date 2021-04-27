@@ -64,7 +64,7 @@ const DataReactTable = ({
     withPagination,
     withSearchEngine,
     manualPageSize: [20, 20, 30, 40],
-    placeholder: "Cauta Produs ...",
+    placeholder: "Cauta receptie ...",
   };
 
   const newProducts =
@@ -104,7 +104,7 @@ const DataReactTable = ({
         <CardBody>
           <div className="react-table__wrapper">
             <div className="card__title">
-              <h3 className="bold-text">🍲 Catalog Produse</h3>
+              <h3 className="bold-text">Istoric Receptii</h3>
             </div>
           </div>
           <ReactTableBase

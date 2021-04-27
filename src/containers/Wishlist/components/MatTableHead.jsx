@@ -14,13 +14,13 @@ const rows = [
   },
 
   {
-    id: 'name', disablePadding: true, label: 'Produs',
+    id: 'name', disablePadding: true, label: 'Denumire Produs ',
   },
   {
     id: 'supplier', disablePadding: false, label: 'Furnizor',
   },
   {
-    id: 'price', disablePadding: false, label: 'Pret',
+    id: 'price', disablePadding: false, label: 'Pret Unitar',
   },
   {
     id: 'um', disablePadding: false, label: 'U.M.',

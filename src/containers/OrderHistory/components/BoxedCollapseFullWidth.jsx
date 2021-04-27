@@ -1,26 +1,57 @@
 import { Button, Container, Row, Card, CardBody, Col } from "reactstrap";
-import Collapse from "../../../shared/components/Collapse";
-import MinimalCollapse from "./MinimalCollapse";
-import MatTableImport from "./Mattableimport";
-import DataReactTable from "./DataReactTable";
 import CreateTableData from "./CreateData";
+import InvoiceTemplate from "./InvoiceTemplate";
+import MatTable from "./MatTable";
+import { SupplierInvoiceFetch } from "../../../redux/actions/products";
+import DataReactTable from "./DataReactTable";
 
 // Edesia
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { GetRestaurantOrder } from "../../../redux/actions/products";
 
-const BoxedCollapseFullWidth = ({ GetRestaurantOrder, orders }) => {
+const BoxedCollapseFullWidth = ({ invoices, SupplierInvoiceFetc }) => {
+
+  const [selectData, setSelectData] = useState([]);
+
   const [showOne, setShowOne] = useState(true);
   const [showTwo, setShowTwo] = useState(false);
+  const [showThree, setShowThree] = useState(false);
+  const [showFour, setShowFour] = useState(false);
 
-  const reactTableData = CreateTableData();
+  function clickOne() {
+    setShowOne(true);
+    setShowTwo(false);
+    setShowThree(false);
+    setShowFour(false);
+  }
 
+  function clickTwo() {
+    setShowOne(false);
+    setShowTwo(true);
+    setShowThree(false);
+    setShowFour(false);
+  }
 
+  function clickThree() {
+    setShowOne(false);
+    setShowTwo(false);
+    setShowThree(true);
+    setShowFour(false);
+  }
+
+  function clickFour() {
+    setShowOne(false);
+    setShowTwo(false);
+    setShowThree(false);
+    setShowFour(true);
+  }
 
   useEffect(() => {
-    GetRestaurantOrder();
+    SupplierInvoiceFetch();
   }, []);
+
+  const reactTableData = CreateTableData();
 
   return (
     <Container>
@@ -29,83 +60,151 @@ const BoxedCollapseFullWidth = ({ GetRestaurantOrder, orders }) => {
           <Card>
             <CardBody>
               <Button
-       onClick={() => setShowOne(!showOne)}
+                onClick={clickOne}
                 color="secondary"
                 size="sm"
                 outline="true"
               >
-                Receptie Marfa
+                Livrari Curier
               </Button>
               <Button
-            
-       onClick={() => setShowOne(!showOne)}
+                onClick={clickTwo}
                 color="secondary"
                 size="sm"
                 outline="true"
               >
-                Order history archive
+                Livrari Furnizor
+              </Button>
+              <Button
+                onClick={clickThree}
+                color="secondary"
+                size="sm"
+                outline="true"
+              >
+                Receptii Partiale
+              </Button>
+              <Button
+                onClick={clickFour}
+                color="secondary"
+                size="sm"
+                outline="true"
+              >
+                Istoric Receptii
               </Button>
             </CardBody>
           </Card>
         </Col>
       </Row>
+
       {showOne ? (
-        <Row>
-          <Col md={12} lg={6}>
-            <Card>
-              <CardBody>
-                <div className="card__title">
-                  <h3 className="bold-text">📦 Receptie Marfa</h3>
-                </div>
-                <Collapse>
-                  {Object.keys(orders) &&
-                    Object.keys(orders).map((key) => (
-                      <MinimalCollapse keys={key} data={orders} />
-                    ))}
-                </Collapse>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col md={12} lg={6}>
-            <Card>
-              <CardBody>
-                <div className="card__title">
-                  <h3 className="bold-text">📦 Receptie Marfa 2</h3>
-                </div>
-                {Object.keys(orders) &&
-                  Object.keys(orders).map((key) => (
-                    <MatTableImport keys={key} data={orders} />
-                  ))}
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      ) : (
-        <Row>
-        <Col md={12} lg={12}>
-          <Card>
-            <CardBody>
-              <div className="card__title">
-                <h3 className="bold-text">📦 Receptie Marfa 2</h3>
+        <>
+          <div>
+            <Row>
+              <Col lg={5}>
+                {invoices &&
+                  invoices.map((invoice) => {
+                    if (!!selectData?.get?.(invoice.id)) {
+                      return <InvoiceTemplate invoice={invoice} />;
+                    }
+                  })}
+              </Col>
+              <Col lg={7}>
+                {/* <DataReactTable reactTableData={reactTableData} /> */}
+                {invoices?.length > 0 ? (
+                  <div className="sticky-top sticky-top-custom">
+                    <MatTable
+                      data={invoices}
+                      setSelectedData={(data) => setSelectData(data)}
+                    />
+                  </div>
+                ) : (
+                  <h1>Nu sunt livrari curier</h1>
+                )}
+              </Col>
+            </Row>
+          </div>
+        </>
+      ) : null}
+
+      {showTwo ? (
+              <>
+          <div>
+            <Row>
+              <Col lg={5}>
+                {invoices &&
+                  invoices.map((invoice) => {
+                    if (!!selectData?.get?.(invoice.id)) {
+                      return <InvoiceTemplate invoice={invoice} />;
+                    }
+                  })}
+              </Col>
+              <Col lg={7}>
+                {/* <DataReactTable reactTableData={reactTableData} /> */}
+                {invoices?.length > 0 ? (
+                  <div className="sticky-top sticky-top-custom">
+                    <MatTable
+                      data={invoices}
+                      setSelectedData={(data) => setSelectData(data)}
+                    />
+                  </div>
+                ) : (
+                  <h1>Nu sunt livrari curier</h1>
+                )}
+              </Col>
+            </Row>
+          </div>
+        </>
+      ) : null}
+
+      {showThree ? (
+              <>
+              <div>
+                <Row>
+                  <Col lg={5}>
+                    {invoices &&
+                      invoices.map((invoice) => {
+                        if (!!selectData?.get?.(invoice.id)) {
+                          return <InvoiceTemplate invoice={invoice} />;
+                        }
+                      })}
+                  </Col>
+                  <Col lg={7}>
+                    {/* <DataReactTable reactTableData={reactTableData} /> */}
+                    {invoices?.length > 0 ? (
+                      <div className="sticky-top sticky-top-custom">
+                        <MatTable
+                          data={invoices}
+                          setSelectedData={(data) => setSelectData(data)}
+                        />
+                      </div>
+                    ) : (
+                      <h1>Nu sunt livrari partiale</h1>
+                    )}
+                  </Col>
+                </Row>
               </div>
-              <DataReactTable reactTableData={reactTableData} />
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-      )}
+            </>
+      ) : null}
+
+      {showFour ? (
+        <>
+          <DataReactTable reactTableData={reactTableData} />
+        </>
+      ) : null}
     </Container>
   );
 };
 
 const mapStateToProps = (state) => {
-  console.log({ state });
   return {
     carts: state.products.cartsDetails,
     orders: state.products.restaurantOrdersDetails,
     user: state.products.user,
+    invoices: state.products.invoiceDetails,
   };
 };
+
+
 export default connect(mapStateToProps, {
-  GetRestaurantOrder,
+  SupplierInvoiceFetch,
 })(BoxedCollapseFullWidth);

@@ -10,7 +10,7 @@ const CreateTableData = () => {
         width: 65,
       },
       {
-        Header: "Image",
+        Header: "Furnizor",
         accessor: "product_image",
         disableGlobalFilter: true,
         disableSortBy: true,
@@ -18,26 +18,26 @@ const CreateTableData = () => {
 
       },
       {
-        Header: "Produs",
-        accessor: "title",
+        Header: "Data Emiterii",
+        accessor: "dataEmiterii",
       },
       {
-        Header: "Furnizor",
-        accessor: "supplier_company.name",
+        Header: "Data Platii",
+        accessor: "dataPlatii",
       },
       {
-        Header: "Cantitate",
-        accessor: "total_stock",
+        Header: "Serie",
+        accessor: "serie",
         disableGlobalFilter: true,
       },
       {
-        Header: "Pret Unitar",
-        accessor: "price",
+        Header: "Numar",
+        accessor: "numar",
         disableGlobalFilter: true,
       },
       {
-        Header: "U.M.",
-        accessor: "quantity_type",
+        Header: "Valoare Totala",
+        accessor: "valoareTotala",
         disableGlobalFilter: true,
       },
       {
